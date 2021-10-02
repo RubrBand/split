@@ -30,7 +30,7 @@ func _input(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	grid = get_parent().get_child(0)
+	grid = get_parent()
 	goto = Vector2(translation.x,translation.z)
 	gameManager = get_node("/root/GameManager")
 
