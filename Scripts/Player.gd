@@ -13,23 +13,19 @@ var gameManager : Node
 func _input(event):
 	if event.is_action_pressed("game_up"):
 		if (goto == Vector2(translation.x,translation.z)):
-			var index = grid.get_cell_item(grid.world_to_map(translation).x,0,grid.world_to_map(translation).z-1)
-			if(!(index > -1) || index >= gameManager.solidcells):
+			if grid.get_cell_item(grid.world_to_map(translation).x,-1,grid.world_to_map(translation).z-1)==0:
 				goto += Vector2(0,-1)
 	if event.is_action_pressed("game_down"):
 		if (goto == Vector2(translation.x,translation.z)):
-			var index = grid.get_cell_item(grid.world_to_map(translation).x,0,grid.world_to_map(translation).z+1)
-			if(!(index > -1) || index >= gameManager.solidcells):
+			if grid.get_cell_item(grid.world_to_map(translation).x,-1,grid.world_to_map(translation).z+1)==0:
 				goto += Vector2(0,1)
 	if event.is_action_pressed("game_left"):
 		if (goto == Vector2(translation.x,translation.z)):
-			var index = grid.get_cell_item(grid.world_to_map(translation).x-1,0,grid.world_to_map(translation).z)
-			if(!(index > -1) || index >= gameManager.solidcells):
+			if grid.get_cell_item(grid.world_to_map(translation).x-1,-1,grid.world_to_map(translation).z)==0:
 				goto += Vector2(-1,0)
 	if event.is_action_pressed("game_right"):
 		if (goto == Vector2(translation.x,translation.z)):
-			var index = grid.get_cell_item(grid.world_to_map(translation).x+1,0,grid.world_to_map(translation).z)
-			if(!(index > -1) || index >= gameManager.solidcells):
+			if grid.get_cell_item(grid.world_to_map(translation).x+1,-1,grid.world_to_map(translation).z)==0:
 				goto += Vector2(1,0)
 
 # Called when the node enters the scene tree for the first time.
