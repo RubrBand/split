@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/door.gd" type="Script" id=1]
+[ext_resource path="res://Meshes/door.tres" type="CubeMesh" id=2]
+
+[node name="door" type="MeshInstance"]
+mesh = ExtResource( 2 )
+material/0 = null
+script = ExtResource( 1 )

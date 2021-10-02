@@ -10,12 +10,12 @@ export var invert = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	._ready()
+	pass
 
 func update():
 	var to = level.get_logic(memindex)
-	if (open!=(to!=invert)):
-		if (to!=invert): open()
+	if (open!=((to!=0)!=invert)):
+		if ((to!=0)!=invert): open()
 		else: close()
 
 #add sum animation shit
@@ -24,7 +24,7 @@ func open():
 	level.set_cell_item(gridpos.x,-1,gridpos.y,0)
 
 func close():
-	if !(level.world_to_map(level.player1).x==gridpos.x)&&(level.world_to_map(level.player1).y==gridpos.y)||(level.world_to_map(level.player2).x==gridpos.x)&&(level.world_to_map(level.player2).y==gridpos.y):
+	if !on_player():
 		open = false
 		level.set_cell_item(gridpos.x,-1,gridpos.y,2)
 

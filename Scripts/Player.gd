@@ -36,7 +36,9 @@ func _ready():
 
 func _process(delta):
 	if (goto!=Vector2(translation.x,translation.z)):
-		if(abs(goto.x-translation.x)<speed*delta&&abs(goto.y-translation.z)<speed*delta): translation = Vector3(goto.x,translation.y,goto.y)
+		if(abs(goto.x-translation.x)<speed*delta&&abs(goto.y-translation.z)<=speed*delta): 
+			translation = Vector3(goto.x,translation.y,goto.y)
+			grid.update_all()
 		else: translate(Vector3(sign(goto.x-translation.x),0,sign(goto.y-translation.z))*speed*delta)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
