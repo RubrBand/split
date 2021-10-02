@@ -9,24 +9,13 @@ var movedist = 1
 var speed = 3
 var grid : GridMap
 var gameManager : Node
+var fallspeed = 6
+var undospeed = 6
+var memories_of_a_better_time = []
 
-func _input(event):
-	if event.is_action_pressed("game_up"):
-		if (goto == Vector2(translation.x,translation.z)):
-			if grid.get_cell_item(grid.world_to_map(translation).x,-1,grid.world_to_map(translation).z-1)==0:
-				goto += Vector2(0,-1)
-	if event.is_action_pressed("game_down"):
-		if (goto == Vector2(translation.x,translation.z)):
-			if grid.get_cell_item(grid.world_to_map(translation).x,-1,grid.world_to_map(translation).z+1)==0:
-				goto += Vector2(0,1)
-	if event.is_action_pressed("game_left"):
-		if (goto == Vector2(translation.x,translation.z)):
-			if grid.get_cell_item(grid.world_to_map(translation).x-1,-1,grid.world_to_map(translation).z)==0:
-				goto += Vector2(-1,0)
-	if event.is_action_pressed("game_right"):
-		if (goto == Vector2(translation.x,translation.z)):
-			if grid.get_cell_item(grid.world_to_map(translation).x+1,-1,grid.world_to_map(translation).z)==0:
-				goto += Vector2(1,0)
+var state = 0 #0 - can move, 1 - can't move, 2 - backwards
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,11 +24,29 @@ func _ready():
 	gameManager = get_node("/root/GameManager")
 
 func _process(delta):
-	if (goto!=Vector2(translation.x,translation.z)):
-		if(abs(goto.x-translation.x)<speed*delta&&abs(goto.y-translation.z)<=speed*delta): 
+	if state == 0:
+		if (goto!=Vector2(translation.x,translation.z)):
+			if(abs(goto.x-translation.x)<speed*delta&&abs(goto.y-translation.z)<=speed*delta): 
+				translation = Vector3(goto.x,translation.y,goto.y)
+				grid.update_all()
+			else: translate(Vector3(sign(goto.x-translation.x),0,sign(goto.y-translation.z))*speed*delta)
+	elif state == 1:
+		if (goto!=Vector2(translation.x,translation.z)):
+			if(abs(goto.x-translation.x)<fallspeed*delta&&abs(goto.y-translation.z)<=fallspeed*delta): 
+				translation = Vector3(goto.x,translation.y,goto.y)
+				if (grid.state == 4 || grid.state == 5): grid.state+=1
+				grid.update_all()
+			else: translate(Vector3(sign(goto.x-translation.x),0,sign(goto.y-translation.z))*fallspeed*delta)
+	elif state == 2:
+		if(abs(goto.x-translation.x)<undospeed*delta&&abs(goto.y-translation.z)<=undospeed*delta):
 			translation = Vector3(goto.x,translation.y,goto.y)
-			grid.update_all()
-		else: translate(Vector3(sign(goto.x-translation.x),0,sign(goto.y-translation.z))*speed*delta)
+			grid.undo(goto.x, goto.y)
+			if(memories_of_a_better_time.size()>0):
+				goto = memories_of_a_better_time.pop_back()
+			else:
+				grid.merge(grid.player1!=self)
+		else: translate(Vector3(sign(goto.x-translation.x),0,sign(goto.y-translation.z))*undospeed*delta)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

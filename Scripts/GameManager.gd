@@ -8,7 +8,7 @@ var solidcells = 1; #the amount of solid cells in the cell library
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	randomize()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
