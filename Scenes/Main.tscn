@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Mesh Libraries/celllibrary.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/GameManager.gd" type="Script" id=3]
 
 [node name="GameManager" type="Node"]
+script = ExtResource( 3 )
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource( 1 )
 cell_size = Vector3( 1, 1, 1 )
 cell_center_y = false
 data = {
-"cells": PoolIntArray( 65535, 1, 0, 0, 65531, 0, 1, 65531, 536870912, 65534, 65531, 0, 65535, 65531, 0, 65534, 65532, 0, 65532, 65533, 0, 65533, 65533, 536870912, 65534, 65533, 0, 65532, 65534, 0, 0, 65535, 0, 65531, 65535, 0, 65532, 65535, 0 )
+"cells": PoolIntArray( 65535, 1, 0, 0, 65531, 0, 1, 65531, 0, 65534, 65531, 536870912, 65535, 65531, 0, 65534, 65532, 0, 65532, 65533, 0, 65533, 65533, 0, 65534, 65533, 536870912, 65532, 65534, 0, 0, 65535, 0, 65531, 65535, 0, 65532, 65535, 0 )
 }
 __meta__ = {
 "_editor_clip_": 0

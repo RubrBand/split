@@ -6,25 +6,37 @@ extends Sprite3D
 # var b = "text"
 var goto : Vector2
 var movedist = 1
-var speed = 1
+var speed = 3
+var grid : GridMap
+var gameManager : Node
 
 func _input(event):
 	if event.is_action_pressed("game_up"):
 		if (goto == Vector2(translation.x,translation.z)):
-			goto += Vector2(0,-1)
+			var index = grid.get_cell_item(grid.world_to_map(translation).x,0,grid.world_to_map(translation).z-1)
+			if(!(index > -1) || index >= gameManager.solidcells):
+				goto += Vector2(0,-1)
 	if event.is_action_pressed("game_down"):
 		if (goto == Vector2(translation.x,translation.z)):
-			goto += Vector2(0,1)
+			var index = grid.get_cell_item(grid.world_to_map(translation).x,0,grid.world_to_map(translation).z+1)
+			if(!(index > -1) || index >= gameManager.solidcells):
+				goto += Vector2(0,1)
 	if event.is_action_pressed("game_left"):
 		if (goto == Vector2(translation.x,translation.z)):
-			goto += Vector2(-1,0)
+			var index = grid.get_cell_item(grid.world_to_map(translation).x-1,0,grid.world_to_map(translation).z)
+			if(!(index > -1) || index >= gameManager.solidcells):
+				goto += Vector2(-1,0)
 	if event.is_action_pressed("game_right"):
 		if (goto == Vector2(translation.x,translation.z)):
-			goto += Vector2(1,0)
+			var index = grid.get_cell_item(grid.world_to_map(translation).x+1,0,grid.world_to_map(translation).z)
+			if(!(index > -1) || index >= gameManager.solidcells):
+				goto += Vector2(1,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	goto = Vector2(translation.x,translation.z);
+	grid = get_node("/root/GameManager/GridMap")
+	goto = Vector2(translation.x,translation.z)
+	gameManager = get_node("/root/GameManager")
 
 func _process(delta):
 	if (goto!=Vector2(translation.x,translation.z)):
