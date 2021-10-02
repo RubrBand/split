@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pinkhop.png-ce99fb8a932bf8190bfc3c00e85fd1cd.stex"
+path="res://.import/greenpull.png-b8de4fbfc820eb32997cf883db567f5f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player/pinkhop.png"
-dest_files=[ "res://.import/pinkhop.png-ce99fb8a932bf8190bfc3c00e85fd1cd.stex" ]
+source_file="res://sprites/player/greenpull.png"
+dest_files=[ "res://.import/greenpull.png-b8de4fbfc820eb32997cf883db567f5f.stex" ]
 
 [params]
 

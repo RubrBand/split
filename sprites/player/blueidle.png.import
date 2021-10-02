@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pinkhop.png-ce99fb8a932bf8190bfc3c00e85fd1cd.stex"
+path="res://.import/blueidle.png-96aefafbc28031292b3dbed062c80162.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player/pinkhop.png"
-dest_files=[ "res://.import/pinkhop.png-ce99fb8a932bf8190bfc3c00e85fd1cd.stex" ]
+source_file="res://sprites/player/blueidle.png"
+dest_files=[ "res://.import/blueidle.png-96aefafbc28031292b3dbed062c80162.stex" ]
 
 [params]
 
@@ -23,7 +23,7 @@ flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
