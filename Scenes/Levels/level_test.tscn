@@ -3,9 +3,12 @@
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Mesh Libraries/celllibrary.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/pressure_plate.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/door.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/exit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Level bits/pressure_plate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Level bits/door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Level bits/exit.tscn" type="PackedScene" id=6]
+
+
+
 
 [node name="GridMap" type="GridMap"]
 mesh_library = ExtResource( 2 )
