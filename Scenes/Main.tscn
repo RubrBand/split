@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Mesh Libraries/celllibrary.tres" type="MeshLibrary" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 
 [node name="GameManager" type="Node"]
 
@@ -9,11 +10,17 @@ mesh_library = ExtResource( 1 )
 cell_size = Vector3( 1, 1, 1 )
 cell_center_y = false
 data = {
-"cells": PoolIntArray( 65535, 1, 0, 0, 65531, 536870912, 1, 65531, 0, 65534, 65531, 0, 65535, 65531, 0, 65534, 65532, 536870912, 65532, 65533, 0, 65533, 65533, 536870912, 65534, 65533, 536870912, 65532, 65534, -1073741824, 0, 65535, -1610612736, 65531, 65535, 0, 65532, 65535, 536870912 )
+"cells": PoolIntArray( 65535, 1, 0, 0, 65531, 0, 1, 65531, 0, 65534, 65531, 0, 65535, 65531, 0, 65534, 65532, 0, 65532, 65533, -1073741824, 65533, 65533, 0, 65534, 65533, 536870912, 65532, 65534, 536870912, 0, 65535, -1610612736, 65531, 65535, 0, 65532, 65535, -1610612736 )
 }
 __meta__ = {
 "_editor_clip_": 0
 }
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.785522, -0.256085, 0.563361, 0, 0.910359, 0.41382, -0.618834, -0.325064, 0.715107, 12.364, 6.58444, 29.8239 )
+transform = Transform( 0.785522, -0.256085, 0.563361, 0, 0.910359, 0.41382, -0.618834, -0.325064, 0.715107, 5.5702, 6.58444, 12.2079 )
+projection = 1
+current = true
+size = 10.0
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33039, 0.295595, 0.569225 )
