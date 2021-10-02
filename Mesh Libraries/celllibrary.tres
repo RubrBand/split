@@ -2,8 +2,7 @@
 
 [ext_resource path="res://Meshes/floor.tres" type="CubeMesh" id=1]
 [ext_resource path="res://Meshes/wall.tres" type="CubeMesh" id=2]
-[ext_resource path="res://Meshes/fake_floor.tres" type="CubeMesh" id=3]
-
+[ext_resource path="res://Meshes/tmp_pressure_plate.tres" type="CubeMesh" id=3]
 
 [resource]
 item/0/name = "floor"
