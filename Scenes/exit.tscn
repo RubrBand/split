@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Meshes/exit.tres" type="CubeMesh" id=1]
+
+[node name="MeshInstance" type="MeshInstance"]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0.0338061, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0.0876918, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
