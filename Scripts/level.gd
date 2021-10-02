@@ -52,6 +52,8 @@ func _input(event):
 			if get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) == 0:
 				player2.memories_of_a_better_time.append(Vector2(player2.translation.x,player2.translation.z))
 				player2.goto += dir
+	if event.is_action_pressed("game_restart"):
+		get_parent().next_scene()
 
 func update_all():
 	for agent in agents:
@@ -66,7 +68,8 @@ func update_all():
 func set_logic(var cell, var value):
 	
 	if logic.size()<=cell:
-		logic.resize(cell+1)
+		for i in range(logic.size(),cell+1):
+			logic.append(0)
 	var changed = logic[cell]!=value
 	logic[cell] = value
 	if changed:

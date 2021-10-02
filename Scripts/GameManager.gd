@@ -21,7 +21,7 @@ func next_scene():
 		add_child(levels[progress].instance())
 	else:
 		add_child(endscene.instance())
-	
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
