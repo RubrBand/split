@@ -11,10 +11,10 @@ var speed = 1
 func _input(event):
 	if event.is_action_pressed("game_up"):
 		if (goto == Vector2(translation.x,translation.z)):
-			goto += Vector2(0,1)
+			goto += Vector2(0,-1)
 	if event.is_action_pressed("game_down"):
 		if (goto == Vector2(translation.x,translation.z)):
-			goto += Vector2(0,-1)
+			goto += Vector2(0,1)
 	if event.is_action_pressed("game_left"):
 		if (goto == Vector2(translation.x,translation.z)):
 			goto += Vector2(-1,0)
@@ -24,11 +24,12 @@ func _input(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	goto = Vector2(translation.x,translation.z);
 
 func _process(delta):
 	if (goto!=Vector2(translation.x,translation.z)):
-		translate(Vector3(sign(translation.x-goto.x),0,sign(translation.z-goto.y))*speed*delta)
+		if(abs(goto.x-translation.x)<speed*delta&&abs(goto.y-translation.z)<speed*delta): translation = Vector3(goto.x,translation.y,goto.y)
+		else: translate(Vector3(sign(goto.x-translation.x),0,sign(goto.y-translation.z))*speed*delta)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
