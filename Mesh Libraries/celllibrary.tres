@@ -1,7 +1,8 @@
-[gd_resource type="MeshLibrary" load_steps=3 format=2]
+[gd_resource type="MeshLibrary" load_steps=4 format=2]
 
 [ext_resource path="res://Meshes/floor.tres" type="CubeMesh" id=1]
 [ext_resource path="res://Meshes/wall.tres" type="CubeMesh" id=2]
+[ext_resource path="res://Meshes/tmp_pressure_plate.tres" type="CubeMesh" id=3]
 
 [resource]
 item/0/name = "floor"
@@ -14,3 +15,8 @@ item/1/mesh = ExtResource( 2 )
 item/1/mesh_transform = null
 item/1/shapes = [  ]
 item/1/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+item/2/name = "pressure_plate"
+item/2/mesh = ExtResource( 3 )
+item/2/mesh_transform = null
+item/2/shapes = [  ]
+item/2/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
