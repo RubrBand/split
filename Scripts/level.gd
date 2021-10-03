@@ -27,22 +27,41 @@ func _ready():
 	player2.textures[2] = preload("res://Sprites/player/pinkpull.png")
 	player1.textures[3] = preload("res://Sprites/player/greenhop.png")
 	player2.textures[3] = preload("res://Sprites/player/pinkhop.png")
+	player1.get_child(0).texture = preload("res://sprites/greenbutton0.png")
+	player2.get_child(0).texture = preload("res://sprites/pinkbutton0.png")
 
 
 func _input(event):
-	if event.is_action_pressed("game_split")&&player1.state==0&&player2.state==0:
+	if event.is_action_released("game_split")&&player1.state==0&&player2.state==0:
 		if state == 0:
 			state = 1
+			player1.get_child(0).visible = true
+			player2.get_child(0).visible = true
 		elif state == 1:
 			state = 0
-	elif event.is_action_pressed("game_select_p1")&&state == 1:
+			player1.get_child(0).visible = false
+			player2.get_child(0).visible = false
+	elif event.is_action_released("game_select_p1")&&state == 1:
 		collapse(true)
-	elif event.is_action_pressed("game_select_p2")&&state == 1:
+		player1.get_child(0).visible = false
+		player2.get_child(0).visible = false
+	elif event.is_action_released("game_select_p2")&&state == 1:
 		collapse(false)
+		player1.get_child(0).visible = false
+		player2.get_child(0).visible = false
 	if (event.is_action_pressed("game_down")||event.is_action_pressed("game_up"))&&state == 3:
 		split(false)
 	elif (event.is_action_pressed("game_left")||event.is_action_pressed("game_right"))&&state == 3:
 		split(true)
+	
+	if event.is_action_pressed("game_select_p1"):
+		player1.get_child(0).texture = preload("res://sprites/greenbutton0.png")
+	if event.is_action_pressed("game_select_p2"):
+		player2.get_child(0).texture = preload("res://sprites/pinkbutton0.png")
+	if event.is_action_released("game_select_p1"):
+		player1.get_child(0).texture = preload("res://sprites/greenbutton1.png")
+	if event.is_action_released("game_select_p2"):
+		player2.get_child(0).texture = preload("res://sprites/pinkbutton1.png")
 	
 	if state == 0:
 		var dir = Vector2(0,0)
@@ -80,13 +99,13 @@ func update_all():
 	if state == 4 && player1.state<=0 && player2.state<=0:
 		state = 0
 		update_all()
-	if player1.translation == player2.translation && player1.state==0 && player2.state==0:
+	if player1.translation == player2.translation && player1.state==0 && player2.state==0&&state!=3:
 		merge(true)
 
 func set_logic(var cell, var value):
 	
 	if logic.size()<=cell:
-		for i in range(logic.size(),cell+1):
+		for _i in range(logic.size(),cell+1):
 			logic.append(0)
 	var changed = logic[cell]!=value
 	logic[cell] = value
