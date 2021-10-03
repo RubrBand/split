@@ -35,10 +35,6 @@ func undo():
 	output()
 
 func output():
-	print("-----------------")
-	print(locked)
-	print(player1)
-	print(player2)
 	level.set_logic(memindex,int(player1||player2||locked))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

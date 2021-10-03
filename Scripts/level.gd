@@ -46,10 +46,10 @@ func _input(event):
 		if event.is_action_pressed("game_right"):
 			dir = Vector2(1,0)
 		if dir != Vector2(0,0)&&(player1.goto == Vector2(player1.translation.x,player1.translation.z))&&(player2.goto == Vector2(player2.translation.x,player2.translation.z)):
-			if get_cell_item(world_to_map(player1.translation).x+dir.x,-1,world_to_map(player1.translation).z+dir.y) == 0:
+			if get_cell_item(world_to_map(player1.translation).x+dir.x,-1,world_to_map(player1.translation).z+dir.y) <= 0:
 				player1.memories_of_a_better_time.append(Vector2(player1.translation.x,player1.translation.z))
 				player1.goto += dir
-			if get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) == 0:
+			if get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) <= 0:
 				player2.memories_of_a_better_time.append(Vector2(player2.translation.x,player2.translation.z))
 				player2.goto += dir
 	if event.is_action_pressed("game_restart"):
@@ -117,11 +117,21 @@ func undo(_x : int, _y : int):
 		if agent.gridpos == Vector2(_x,_y):
 			agent.undo()
 
-func raycast(from:Vector2, dir : Vector2):
-	if get_cell_item(from.x,-1,from.y)!=0:
+func raycast(from:Vector2, dir : Vector2, limit = 50):
+	if get_cell_item(from.x,-1,from.y)>0:
 		return -1
 	else:
-		return raycast(from+dir, dir)+1
+		if limit>0:
+			var ans = raycast(from+dir, dir, limit-1)
+			if ans == -2:
+				if get_cell_item(from.x,-1,from.y)==0:
+					return 1
+				else:
+					return -2
+			else:
+				return ans + 1
+		else:
+			return -2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
