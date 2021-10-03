@@ -21,6 +21,7 @@ func update():
 				stepped_on = false
 				broken = true
 				level.set_cell_item(gridpos.x,-1,gridpos.y,-1)
+				visible = false
 
 
 
@@ -28,7 +29,8 @@ func undo():
 	stepped_on = false
 	if broken:
 		broken = false
-		level.set_cell_item(gridpos.x,-1,gridpos.y,0)
+		level.set_cell_item(gridpos.x,-1,gridpos.y,1)
+		visible = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
