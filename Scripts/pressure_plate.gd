@@ -12,10 +12,11 @@ func _ready():
 	pass
 
 func update():
-	if on_player():
-		level.set_logic(memindex,1)
-	else: 
-		level.set_logic(memindex,0)
+	if level.state == 0:
+		if on_player():
+			level.set_logic(memindex,1)
+		else: 
+			level.set_logic(memindex,0)
 
 
 

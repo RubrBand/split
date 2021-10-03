@@ -22,8 +22,8 @@ func update():
 func undo():
 	pass
 
-func on_player():
-	return (level.world_to_map(level.player1.translation).x==gridpos.x)&&(level.world_to_map(level.player1.translation).z==gridpos.y)||(level.world_to_map(level.player2.translation).x==gridpos.x)&&(level.world_to_map(level.player2.translation).z==gridpos.y)
+func on_player(num = -1):
+	return (num!=1)&&(level.world_to_map(level.player1.translation).x==gridpos.x)&&(level.world_to_map(level.player1.translation).z==gridpos.y)||(num!=0)&&(level.world_to_map(level.player2.translation).x==gridpos.x)&&(level.world_to_map(level.player2.translation).z==gridpos.y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

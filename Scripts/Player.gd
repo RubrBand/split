@@ -40,7 +40,7 @@ func _process(delta):
 	elif state == 2:
 		if(abs(goto.x-translation.x)<undospeed*delta&&abs(goto.y-translation.z)<=undospeed*delta):
 			translation = Vector3(goto.x,translation.y,goto.y)
-			grid.undo(goto.x, goto.y)
+			grid.undo(grid.world_to_map(translation).x, grid.world_to_map(translation).z)
 			if(memories_of_a_better_time.size()>0):
 				goto = memories_of_a_better_time.pop_back()
 			else:

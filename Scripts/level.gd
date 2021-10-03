@@ -62,6 +62,7 @@ func update_all():
 		state = 0
 		player1.state = 0
 		player2.state = 0
+		update_all()
 	if player1.translation == player2.translation && state == 0:
 		merge(true)
 
@@ -111,9 +112,9 @@ func split(horizontal:bool):
 	state = 4 + int(move1 == 0)+int(move2 == 0)
 	update_all()
 
-func undo(x : int, y : int):
+func undo(_x : int, _y : int):
 	for agent in agents:
-		if agent.gridpos == Vector2(x,y):
+		if agent.gridpos == Vector2(_x,_y):
 			agent.undo()
 
 func raycast(from:Vector2, dir : Vector2):
