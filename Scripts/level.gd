@@ -79,10 +79,8 @@ func update_all():
 			collapse(true)
 	if state == 6:
 		state = 0
-#		player1.state = int(player1.state==3)*3
-#		player2.state = int(player2.state==3)*3
 		update_all()
-	if player1.translation == player2.translation && state == 0:
+	if player1.translation == player2.translation && player1.state==0 && player2.state==0:
 		merge(true)
 
 func set_logic(var cell, var value):
