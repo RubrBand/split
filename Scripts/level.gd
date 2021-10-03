@@ -17,14 +17,16 @@ var floorcount = 2 #how many floor types there are, they should be the first one
 func _ready():
 	player1 = get_node("player1")
 	player2 = get_node("player2")
+	player1.textures.resize(4)
+	player2.textures.resize(4)
 	player1.textures[0] = preload("res://Textures/greenidle.tres")
 	player2.textures[0] = preload("res://Textures/pinkidle.tres")
 	player1.textures[1] = preload("res://Sprites/player/greenpush.png")
-	player1.textures[1] = preload("res://Sprites/player/pinkpush.png")
+	player2.textures[1] = preload("res://Sprites/player/pinkpush.png")
 	player1.textures[2] = preload("res://Sprites/player/greenpull.png")
-	player1.textures[2] = preload("res://Sprites/player/pinkpull.png")
+	player2.textures[2] = preload("res://Sprites/player/pinkpull.png")
 	player1.textures[3] = preload("res://Sprites/player/greenhop.png")
-	player1.textures[3] = preload("res://Sprites/player/pinkhop.png")
+	player2.textures[3] = preload("res://Sprites/player/pinkhop.png")
 
 
 func _input(event):

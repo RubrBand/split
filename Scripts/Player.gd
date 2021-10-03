@@ -24,7 +24,6 @@ var state = 0 #-1 - dead, 0 - not moving, 1 - moving, 2 - moving backwards, 3 - 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	textures.resize(4)
 	y_normal = translation.y
 	grid = get_parent()
 	goto = Vector2(translation.x,translation.z)
@@ -32,16 +31,32 @@ func _ready():
 
 func _process(delta):
 	if state == 1:
-		if(abs(goto.x-translation.x)<speed*delta&&abs(goto.y-translation.z)<=speed*delta&&abs(y_normal-translation.y)<speed*delta*3): 
-			translation = Vector3(goto.x,y_normal,goto.y)
+		if(abs(goto.x-translation.x)<undospeed*delta):
+			translation.x=goto.x
+		else: translation.x += sign(goto.x-translation.x)*speed*delta
+		if(abs(goto.y-translation.z)<undospeed*delta):
+			translation.z=goto.y
+		else: translation.z += sign(goto.y-translation.z)*speed*delta
+		if(abs(y_normal-translation.y)<undospeed*delta*3):
+			translation.y=y_normal
+		else: translation.y += sign(y_normal-translation.y)*speed*delta*3
+		
+		if(translation==Vector3(goto.x,y_normal,goto.y)): 
 			if (grid.state == 4 || grid.state == 5): grid.state+=1
 			if(grid.get_cell_item(grid.world_to_map(translation).x,-1,grid.world_to_map(translation).z)==-1):
 				state = 3
 			else: 
 				grid.update_all()
 				state = 0
-		else: translate(Vector3(sign(goto.x-translation.x),sign(y_normal-translation.y)*3,sign(goto.y-translation.z))*speed*delta)
+		
 	elif state == 2:
+		if(abs(goto.x-translation.x)<undospeed*delta):
+			translation.x=goto.x
+		if(abs(goto.y-translation.z)<undospeed*delta):
+			translation.z=goto.y
+		if(abs(y_normal-translation.y)<undospeed*delta*3):
+			translation.y=y_normal
+		
 		if(abs(goto.x-translation.x)<undospeed*delta&&abs(goto.y-translation.z)<=undospeed*delta&&abs(y_normal-translation.y)<undospeed*delta*3):
 			translation = Vector3(goto.x,y_normal,goto.y)
 			grid.undo(grid.world_to_map(translation).x, grid.world_to_map(translation).z)
@@ -62,7 +77,17 @@ func _process(delta):
 	
 	#animation
 	if state == 0:
-		pass
+		texture = textures[0]
+	elif state == 3:
+		texture == textures[2]
+	elif grid.state == 0:
+		texture = textures[3]
+	elif grid.state>3 || state == 2:
+#		print(String(goto.x)+" "+String(translation.x))
+		if(goto.x>=translation.x&&goto.y<=translation.z&&y_normal>=translation.y):
+			texture = textures[1]
+		elif(goto.x<=translation.x&&goto.y>=translation.z&&y_normal<=translation.y):
+			texture = textures[2]
 
 func die():
 	state = -1
