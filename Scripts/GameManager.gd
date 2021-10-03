@@ -16,13 +16,17 @@ func _ready():
 	add_child(startScene.instance())
 
 func next_scene():
-	get_child(0).queue_free()
+	get_child(1).queue_free()
 	if progress < levels.size():
 		add_child(levels[progress].instance())
 	else:
 		add_child(endscene.instance())
 
-
+func _input(event):
+	if event.is_action_pressed("game_split"):
+		$Label.texture = preload("res://sprites/spacebutton0.png")
+	elif event.is_action_released("game_split"):
+		$Label.texture = preload("res://sprites/spacebutton1.png")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
