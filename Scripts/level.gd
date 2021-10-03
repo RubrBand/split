@@ -17,15 +17,11 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("game_split"):
+	if event.is_action_pressed("game_split")&&player1.state==0&&player2.state==0:
 		if state == 0:
 			state = 1
-			player1.state = 1
-			player2.state = 1
 		elif state == 1:
 			state = 0
-			player1.state = 0
-			player2.state = 0
 	elif event.is_action_pressed("game_select_p1")&&state == 1:
 		collapse(true)
 	elif event.is_action_pressed("game_select_p2")&&state == 1:
@@ -45,23 +41,33 @@ func _input(event):
 			dir = Vector2(-1,0)
 		if event.is_action_pressed("game_right"):
 			dir = Vector2(1,0)
-		if dir != Vector2(0,0)&&(player1.goto == Vector2(player1.translation.x,player1.translation.z))&&(player2.goto == Vector2(player2.translation.x,player2.translation.z)):
+		if dir != Vector2(0,0)&&player1.state==0&&player2.state==0:
 			if get_cell_item(world_to_map(player1.translation).x+dir.x,-1,world_to_map(player1.translation).z+dir.y) <= 0:
 				player1.memories_of_a_better_time.append(Vector2(player1.translation.x,player1.translation.z))
 				player1.goto += dir
+				player1.state = 1
 			if get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) <= 0:
 				player2.memories_of_a_better_time.append(Vector2(player2.translation.x,player2.translation.z))
 				player2.goto += dir
+				player2.state = 1
 	if event.is_action_pressed("game_restart"):
 		get_parent().next_scene()
 
 func update_all():
 	for agent in agents:
 		agent.update()
+	if state == 0 && player1.state == -1:
+		if player2.state == -1:
+			get_parent().next_scene()
+		elif player2.state == 0:
+			collapse(false)
+	elif state == 0 && player2.state == -1:
+		if player1.state == 0:
+			collapse(true)
 	if state == 6:
 		state = 0
-		player1.state = 0
-		player2.state = 0
+#		player1.state = int(player1.state==3)*3
+#		player2.state = int(player2.state==3)*3
 		update_all()
 	if player1.translation == player2.translation && state == 0:
 		merge(true)
@@ -85,14 +91,14 @@ func collapse(tofirst:bool):
 	state = 2
 	if tofirst:
 		player2.state = 2
-		player1.state = 1
 	else:
 		player1.state = 2
-		player2.state = 1
 
 func merge(tofirst:bool):
 	player1.state = 1
 	player2.state = 1
+	player1.memories_of_a_better_time = []
+	player2.memories_of_a_better_time = []
 	if tofirst:
 		player2.translation = player1.translation
 	else:
@@ -109,6 +115,8 @@ func split(horizontal:bool):
 	var move2 = raycast(Vector2(world_to_map(player2.translation).x,world_to_map(player2.translation).z), -1*dir)
 	player1.goto += dir*move1
 	player2.goto += -1*dir*move2
+	player1.state = 1
+	player2.state = 1
 	state = 4 + int(move1 == 0)+int(move2 == 0)
 	update_all()
 

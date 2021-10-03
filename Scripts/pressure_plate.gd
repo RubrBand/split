@@ -21,7 +21,7 @@ func update():
 
 
 func undo():
-	level.setLogic(memindex, 0)
+	level.set_logic(memindex, 0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
