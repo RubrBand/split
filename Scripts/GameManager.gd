@@ -16,7 +16,9 @@ func _ready():
 	add_child(startScene.instance())
 
 func next_scene():
-	get_child(1).queue_free()
+	var child = get_child(1)
+	remove_child(child)
+	child.queue_free()
 	if progress < levels.size():
 		add_child(levels[progress].instance())
 	else:
