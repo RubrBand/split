@@ -16,7 +16,7 @@ var y_normal : float
 var y_velocity = 0.0
 var gravity = 20
 
-var state = 0 #0 - can move, 1 - can't move, 2 - backwards, 3 - falling. -1 - dead
+var state = 0 #-1 - dead, 0 - not moving, 1 - moving, 2 - moving backwards, 3 - falling
 
 
 
