@@ -11,10 +11,20 @@ var player2
 var state = 0 #0 - players can move, 1 - waiting to select player, 2 - PLAYER REVERSING (beeping noises), 3 - waiting to select direction, 4,5 - players being pushed
 var markers = []
 
+var floorcount = 2 #how many floor types there are, they should be the first ones
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player1 = get_node("player1")
 	player2 = get_node("player2")
+	player1.textures[0] = preload("res://Textures/greenidle.tres")
+	player2.textures[0] = preload("res://Textures/pinkidle.tres")
+	player1.textures[1] = preload("res://Sprites/player/greenpush.png")
+	player1.textures[1] = preload("res://Sprites/player/pinkpush.png")
+	player1.textures[2] = preload("res://Sprites/player/greenpull.png")
+	player1.textures[2] = preload("res://Sprites/player/pinkpull.png")
+	player1.textures[3] = preload("res://Sprites/player/greenhop.png")
+	player1.textures[3] = preload("res://Sprites/player/pinkhop.png")
 
 
 func _input(event):
@@ -43,11 +53,11 @@ func _input(event):
 		if event.is_action_pressed("game_right"):
 			dir = Vector2(1,0)
 		if dir != Vector2(0,0)&&player1.state==0&&player2.state==0:
-			if get_cell_item(world_to_map(player1.translation).x+dir.x,-1,world_to_map(player1.translation).z+dir.y) <= 0:
+			if get_cell_item(world_to_map(player1.translation).x+dir.x,-1,world_to_map(player1.translation).z+dir.y) <= floorcount-1:
 				player1.memories_of_a_better_time.append(Vector2(player1.translation.x,player1.translation.z))
 				player1.goto += dir
 				player1.state = 1
-			if get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) <= 0:
+			if get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) <= floorcount-1:
 				player2.memories_of_a_better_time.append(Vector2(player2.translation.x,player2.translation.z))
 				player2.goto += dir
 				player2.state = 1
@@ -98,8 +108,8 @@ func collapse(tofirst:bool):
 func merge(tofirst:bool):
 	player1.state = 1
 	player2.state = 1
-	player1.texture = preload("res://Textures/playertexture.tres")
-	player2.texture = preload("res://Textures/playertexture.tres")
+	player1.textures[0] = preload("res://Textures/playertexture.tres")
+	player2.textures[0] = preload("res://Textures/playertexture.tres")
 	player1.memories_of_a_better_time = []
 	player2.memories_of_a_better_time = []
 	if tofirst:
@@ -126,8 +136,8 @@ func split(horizontal:bool):
 	player2.goto += -1*dir*move2
 	player1.state = 1
 	player2.state = 1
-	player1.texture = preload("res://Textures/greenidle.tres")
-	player2.texture = preload("res://Textures/pinkidle.tres")
+	player1.textures[0] = preload("res://Textures/greenidle.tres")
+	player2.textures[0] = preload("res://Textures/pinkidle.tres")
 	
 	for marker in markers:
 		marker.queue_free()
@@ -142,13 +152,13 @@ func undo(_x : int, _y : int):
 			agent.undo()
 
 func raycast(from:Vector2, dir : Vector2, limit = 50):
-	if get_cell_item(from.x,-1,from.y)>0:
+	if get_cell_item(from.x,-1,from.y)>floorcount-1:
 		return -1
 	else:
 		if limit>0:
 			var ans = raycast(from+dir, dir, limit-1)
 			if ans == -2:
-				if get_cell_item(from.x,-1,from.y)==0:
+				if get_cell_item(from.x,-1,from.y)!=-1:
 					return 1
 				else:
 					return -2

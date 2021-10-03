@@ -15,6 +15,8 @@ var memories_of_a_better_time = []
 var y_normal : float
 var y_velocity = 0.0
 var gravity = 20
+var textures = [] #0 - idle, 1 - push, 2 - pull, 3 - jump
+
 
 var state = 0 #-1 - dead, 0 - not moving, 1 - moving, 2 - moving backwards, 3 - falling
 
@@ -22,6 +24,7 @@ var state = 0 #-1 - dead, 0 - not moving, 1 - moving, 2 - moving backwards, 3 - 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	textures.resize(4)
 	y_normal = translation.y
 	grid = get_parent()
 	goto = Vector2(translation.x,translation.z)
@@ -54,6 +57,12 @@ func _process(delta):
 			y_velocity = 0
 			translation.y = y_normal-10
 			die()
+	
+	
+	
+	#animation
+	if state == 0:
+		pass
 
 func die():
 	state = -1
