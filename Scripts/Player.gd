@@ -82,7 +82,7 @@ func _process(delta):
 	if state == 0 || grid.state == 3:
 		texture = textures[0]
 	elif state == 3:
-		texture == textures[2]
+		texture = textures[2]
 	elif grid.state == 0:
 		texture = textures[3]
 	elif grid.state>3 || state == 2:

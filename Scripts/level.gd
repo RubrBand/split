@@ -80,13 +80,13 @@ func update_all():
 	if state == 4 && player1.state<=0 && player2.state<=0:
 		state = 0
 		update_all()
-	if player1.translation == player2.translation && player1.state==0 && player2.state==0:
+	if player1.translation == player2.translation && player1.state==0 && player2.state==0&&state!=3:
 		merge(true)
 
 func set_logic(var cell, var value):
 	
 	if logic.size()<=cell:
-		for i in range(logic.size(),cell+1):
+		for _i in range(logic.size(),cell+1):
 			logic.append(0)
 	var changed = logic[cell]!=value
 	logic[cell] = value
