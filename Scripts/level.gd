@@ -27,8 +27,8 @@ func _ready():
 	player2.textures[2] = preload("res://Sprites/player/pinkpull.png")
 	player1.textures[3] = preload("res://Sprites/player/greenhop.png")
 	player2.textures[3] = preload("res://Sprites/player/pinkhop.png")
-	player1.get_child(0).texture = preload("res://sprites/greenbutton0.png")
-	player2.get_child(0).texture = preload("res://sprites/pinkbutton0.png")
+	player1.get_child(0).texture = preload("res://sprites/greenbutton1.png")
+	player2.get_child(0).texture = preload("res://sprites/pinkbutton1.png")
 
 
 func _input(event):
@@ -149,6 +149,7 @@ func merge(tofirst:bool):
 		dir = Vector2(dir.y, -dir.x)
 
 func split(horizontal:bool):
+	$Camera.shake(0.1,1,0.05)
 	var dir = Vector2(int(horizontal),int(!horizontal))
 	dir *= (randi()%2)*2-1
 	var move1 = raycast(Vector2(world_to_map(player1.translation).x,world_to_map(player1.translation).z), dir)
