@@ -9,7 +9,7 @@ var movedist = 1
 var speed = 3
 var grid : GridMap
 var gameManager : Node
-#var fallspeed = 6
+var fallspeed = 5
 var undospeed = 6
 var memories_of_a_better_time = []
 var y_normal : float
@@ -31,15 +31,16 @@ func _ready():
 
 func _process(delta):
 	if state == 1:
-		if(abs(goto.x-translation.x)<undospeed*delta):
+		var tspeed = int(grid.state >3)*fallspeed + int(grid.state<4)*speed
+		if(abs(goto.x-translation.x)<tspeed*delta):
 			translation.x=goto.x
-		else: translation.x += sign(goto.x-translation.x)*speed*delta
-		if(abs(goto.y-translation.z)<undospeed*delta):
+		else: translation.x += sign(goto.x-translation.x)*tspeed*delta
+		if(abs(goto.y-translation.z)<tspeed*delta):
 			translation.z=goto.y
-		else: translation.z += sign(goto.y-translation.z)*speed*delta
-		if(abs(y_normal-translation.y)<undospeed*delta*3):
+		else: translation.z += sign(goto.y-translation.z)*tspeed*delta
+		if(abs(y_normal-translation.y)<tspeed*delta*3):
 			translation.y=y_normal
-		else: translation.y += sign(y_normal-translation.y)*speed*delta*3
+		else: translation.y += sign(y_normal-translation.y)*tspeed*delta*3
 		
 		if(translation==Vector3(goto.x,y_normal,goto.y)): 
 			if (grid.state == 4 || grid.state == 5): grid.state+=1
@@ -52,13 +53,13 @@ func _process(delta):
 	elif state == 2:
 		if(abs(goto.x-translation.x)<undospeed*delta):
 			translation.x=goto.x
-		else: translation.x += sign(goto.x-translation.x)*speed*delta
+		else: translation.x += sign(goto.x-translation.x)*undospeed*delta
 		if(abs(goto.y-translation.z)<undospeed*delta):
 			translation.z=goto.y
-		else: translation.z += sign(goto.y-translation.z)*speed*delta
+		else: translation.z += sign(goto.y-translation.z)*undospeed*delta
 		if(abs(y_normal-translation.y)<undospeed*delta*3):
 			translation.y=y_normal
-		else: translation.y += sign(y_normal-translation.y)*speed*delta*3
+		else: translation.y += sign(y_normal-translation.y)*undospeed*delta*3
 		
 		if(translation==Vector3(goto.x,y_normal,goto.y)): 
 			grid.undo(grid.world_to_map(translation).x, grid.world_to_map(translation).z)
