@@ -9,7 +9,7 @@ var movedist = 1
 var speed = 5
 var grid : GridMap
 var gameManager : Node
-var fallspeed = 8
+var fallspeed = 1
 var undospeed = 12
 var memories_of_a_better_time = []
 var y_normal : float
@@ -43,7 +43,7 @@ func _process(delta):
 		else: translation.y += sign(y_normal-translation.y)*tspeed*delta*3
 		
 		if(translation==Vector3(goto.x,y_normal,goto.y)): 
-			if (grid.state == 4 || grid.state == 5): grid.state+=1
+#			if (grid.state == 4 || grid.state == 5): grid.state+=1
 			if(grid.get_cell_item(grid.world_to_map(translation).x,-1,grid.world_to_map(translation).z)==-1):
 				state = 3
 			else: 
