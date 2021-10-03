@@ -1,10 +1,10 @@
 [gd_resource type="Environment" load_steps=2 format=2]
 
-[sub_resource type="ProceduralSky" id=1]
+[ext_resource path="res://new_proceduralsky.tres" type="ProceduralSky" id=1]
 
 [resource]
 background_mode = 3
-background_sky = SubResource( 1 )
+background_sky = ExtResource( 1 )
 background_color = Color( 0.0627451, 0.164706, 0.34902, 1 )
 fog_depth_begin = 23.8
 ssao_enabled = true
