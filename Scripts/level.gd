@@ -8,7 +8,7 @@ var logic = []
 var agents = []
 var player1
 var player2
-var state = 0 #0 - players can move, 1 - waiting to select player, 2 - PLAYER REVERSING (beeping noises), 3 - waiting to select direction, 4,5 - players being pushed
+var state = 0 #0 - players can move, 1 - waiting to select player, 2 - PLAYER REVERSING (beeping noises), 3 - waiting to select direction, 4 - players being pushed
 var markers = []
 
 var floorcount = 2 #how many floor types there are, they should be the first ones
@@ -77,7 +77,10 @@ func update_all():
 	elif state == 0 && player2.state == -1:
 		if player1.state == 0:
 			collapse(true)
-	if state == 6:
+	print(state)
+	print(player1.state)
+	print(player2.state)
+	if state == 4 && player1.state==0 && player2.state==0:
 		state = 0
 		update_all()
 	if player1.translation == player2.translation && player1.state==0 && player2.state==0:
@@ -138,12 +141,11 @@ func split(horizontal:bool):
 	player2.state = 1
 	player1.textures[0] = preload("res://Textures/greenidle.tres")
 	player2.textures[0] = preload("res://Textures/pinkidle.tres")
-	
+	state = 4
 	for marker in markers:
 		marker.queue_free()
 	markers = []
 	
-	state = 4 + int(move1 == 0)+int(move2 == 0)
 	update_all()
 
 func undo(_x : int, _y : int):
