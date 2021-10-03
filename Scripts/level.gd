@@ -97,6 +97,8 @@ func collapse(tofirst:bool):
 func merge(tofirst:bool):
 	player1.state = 1
 	player2.state = 1
+	player1.texture = preload("res://Textures/playertexture.tres")
+	player2.texture = preload("res://Textures/playertexture.tres")
 	player1.memories_of_a_better_time = []
 	player2.memories_of_a_better_time = []
 	if tofirst:
@@ -117,6 +119,8 @@ func split(horizontal:bool):
 	player2.goto += -1*dir*move2
 	player1.state = 1
 	player2.state = 1
+	player1.texture = preload("res://Textures/greenidle.tres")
+	player2.texture = preload("res://Textures/pinkidle.tres")
 	state = 4 + int(move1 == 0)+int(move2 == 0)
 	update_all()
 
