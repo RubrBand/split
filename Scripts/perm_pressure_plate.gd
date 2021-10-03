@@ -8,10 +8,11 @@ export var memindex = 0
 var player1 = false
 var player2 = false
 var locked = false
+var mesh
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	mesh = self
 
 func update():
 	if level.state == 0:
@@ -20,8 +21,14 @@ func update():
 		if on_player(1):
 			player2 = true
 		output()
+	elif level.state == 4&&(player1||player2):
+		locked = true
+		output()
 
-
+func set_material(mat):
+	mesh.set_surface_material(0, mat)
+	for i in get_children():
+		i.set_surface_material(0, mat)
 
 func undo():
 	
@@ -35,6 +42,12 @@ func undo():
 	output()
 
 func output():
+	if !(player1||player2):
+		set_material(preload("res://Materials/red.tres"))
+	elif (player1 && player2) || locked:
+		set_material(preload("res://Materials/green.tres"))
+	else:
+		set_material(preload("res://Materials/yellow.tres"))
 	level.set_logic(memindex,int(player1||player2||locked))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
