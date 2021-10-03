@@ -149,11 +149,12 @@ func merge(tofirst:bool):
 		dir = Vector2(dir.y, -dir.x)
 
 func split(horizontal:bool):
-	$Camera.shake(0.1,1,0.05)
 	var dir = Vector2(int(horizontal),int(!horizontal))
 	dir *= (randi()%2)*2-1
 	var move1 = raycast(Vector2(world_to_map(player1.translation).x,world_to_map(player1.translation).z), dir)
 	var move2 = raycast(Vector2(world_to_map(player2.translation).x,world_to_map(player2.translation).z), -1*dir)
+	print(float(max(move1,move2)))
+	$Camera.shake(0.05, float(max(move1, move2)) / player1.fallspeed, 0.05)
 	player1.goto += dir*move1
 	player2.goto += -1*dir*move2
 	player1.state = 1
