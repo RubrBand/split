@@ -19,6 +19,13 @@ config/name="Split"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [input]
 
 game_up={
@@ -68,4 +75,5 @@ game_restart={
 
 [rendering]
 
+quality/filters/msaa=1
 environment/default_environment="res://default_env.tres"

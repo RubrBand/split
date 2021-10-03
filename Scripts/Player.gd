@@ -6,11 +6,11 @@ extends Sprite3D
 # var b = "text"
 var goto : Vector2
 var movedist = 1
-var speed = 3
+var speed = 5
 var grid : GridMap
 var gameManager : Node
-var fallspeed = 5
-var undospeed = 6
+var fallspeed = 8
+var undospeed = 12
 var memories_of_a_better_time = []
 var y_normal : float
 var y_velocity = 0.0
@@ -79,7 +79,7 @@ func _process(delta):
 	
 	
 	#animation
-	if state == 0:
+	if state == 0 || grid.state == 3:
 		texture = textures[0]
 	elif state == 3:
 		texture == textures[2]
