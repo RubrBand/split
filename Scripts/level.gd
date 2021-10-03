@@ -9,6 +9,7 @@ var agents = []
 var player1
 var player2
 var state = 0 #0 - players can move, 1 - waiting to select player, 2 - PLAYER REVERSING (beeping noises), 3 - waiting to select direction, 4,5 - players being pushed
+var markers = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -108,7 +109,13 @@ func merge(tofirst:bool):
 	player1.goto = Vector2(player1.translation.x,player1.translation.z)
 	player2.goto = Vector2(player2.translation.x,player2.translation.z)
 	state = 3
-	#change sprite to blue
+	var dir = Vector2(1,0)
+	for i in range(0,4):
+		var _len = raycast(Vector2(world_to_map(player1.translation).x,world_to_map(player1.translation).z), dir)
+		markers.append(preload("res://Scenes/splittarget.tscn").instance())
+		markers[i].translation = player1.translation + Vector3(dir.x,0,dir.y)*_len
+		add_child(markers[i])
+		dir = Vector2(dir.y, -dir.x)
 
 func split(horizontal:bool):
 	var dir = Vector2(int(horizontal),int(!horizontal))
@@ -121,6 +128,11 @@ func split(horizontal:bool):
 	player2.state = 1
 	player1.texture = preload("res://Textures/greenidle.tres")
 	player2.texture = preload("res://Textures/pinkidle.tres")
+	
+	for marker in markers:
+		marker.queue_free()
+	markers = []
+	
 	state = 4 + int(move1 == 0)+int(move2 == 0)
 	update_all()
 
