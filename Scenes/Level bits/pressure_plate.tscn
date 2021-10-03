@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/pressure_plate.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/pressure_plate.tres" type="CubeMesh" id=2]
+[ext_resource path="res://Materials/red.tres" type="Material" id=3]
 
 [node name="pressure_plate" type="MeshInstance"]
 mesh = ExtResource( 2 )
-material/0 = null
+material/0 = ExtResource( 3 )
 script = ExtResource( 1 )
