@@ -9,7 +9,7 @@ var movedist = 1
 var speed = 5
 var grid : GridMap
 var gameManager : Node
-var fallspeed = 1
+var fallspeed = 8
 var undospeed = 12
 var memories_of_a_better_time = []
 var y_normal : float
@@ -87,10 +87,14 @@ func _process(delta):
 		texture = textures[3]
 	elif grid.state>3 || state == 2:
 #		print(String(goto.x)+" "+String(translation.x))
-		if(goto.x>=translation.x&&goto.y<=translation.z&&y_normal>=translation.y):
+		if(goto.x>=translation.x&&goto.y>=translation.z&&y_normal>=translation.y):
 			texture = textures[1]
-		elif(goto.x<=translation.x&&goto.y>=translation.z&&y_normal<=translation.y):
+		elif(goto.x<=translation.x&&goto.y<=translation.z&&y_normal<=translation.y):
 			texture = textures[2]
+	
+	if (goto.x>translation.x||goto.y<translation.z):
+		flip_h = false
+	elif (goto.x<translation.x||goto.y>translation.z): flip_h = true
 	
 	if state == 2:
 		opacity = 0.5

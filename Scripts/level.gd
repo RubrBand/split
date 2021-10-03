@@ -77,10 +77,7 @@ func update_all():
 	elif state == 0 && player2.state == -1:
 		if player1.state == 0:
 			collapse(true)
-	print(state)
-	print(player1.state)
-	print(player2.state)
-	if state == 4 && player1.state==0 && player2.state==0:
+	if state == 4 && player1.state<=0 && player2.state<=0:
 		state = 0
 		update_all()
 	if player1.translation == player2.translation && player1.state==0 && player2.state==0:
@@ -111,6 +108,8 @@ func collapse(tofirst:bool):
 func merge(tofirst:bool):
 	player1.state = 1
 	player2.state = 1
+	player1.flip_h = false
+	player2.flip_h = false
 	player1.textures[0] = preload("res://Textures/playertexture.tres")
 	player2.textures[0] = preload("res://Textures/playertexture.tres")
 	player1.memories_of_a_better_time = []
