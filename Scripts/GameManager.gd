@@ -10,7 +10,7 @@ export var startScene : PackedScene
 export var endscene : PackedScene
 var progress = -1
 
-var textboxlocation = Vector2(317,1200)
+var textboxlocation = Vector2(692,1200)
 
 var terminal_visible = false
 
