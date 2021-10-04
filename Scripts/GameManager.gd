@@ -63,6 +63,7 @@ func _input(event):
 			else:
 				$GUI/Terminal/MarginContainer/TextEdit.text += text_buffer
 				text_buffer = ""
+				$GUI/Terminal/MarginContainer/TextEdit.scroll_vertical = 1000
 	elif event.is_action_released("game_split"):
 		$GUI/Label.texture = preload("res://sprites/spacebutton1.png")
 		
@@ -79,6 +80,7 @@ func _process(delta):
 					text_countdown = 0
 					$GUI/Terminal/MarginContainer/TextEdit.text += text_buffer.left(1)
 					text_buffer = text_buffer.right(1)
+				$GUI/Terminal/MarginContainer/TextEdit.scroll_vertical = 1000
 			
 	else:
 		if $GUI/Terminal.rect_position.y < textboxlocation.y:

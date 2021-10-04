@@ -13,6 +13,7 @@ var markers = []
 export(String, MULTILINE) var starttext = ""
 onready var GameManager = get_node("/root/GameManager")
 
+export var level1 = false
 
 
 var floorcount = 2 #how many floor types there are, they should be the first ones
@@ -34,8 +35,17 @@ func _ready():
 	player1.get_child(0).texture = preload("res://sprites/greenbutton1.png")
 	player2.get_child(0).texture = preload("res://sprites/pinkbutton1.png")
 	
-	GameManager.terminal_visible = true
-	GameManager.write_in_terminal(starttext)
+	if level1:
+		GameManager.input_lock = true
+		player1.textures[0] = preload("res://Textures/wakingup.tres")
+		player2.textures[0] = preload("res://Textures/wakingup.tres")
+		player1.texture.current_frame = 0
+		player2.texture.current_frame = 0
+	else:
+		GameManager.terminal_visible = true
+		GameManager.write_in_terminal(starttext)
+	
+	
 
 
 func _input(event):
@@ -210,5 +220,22 @@ func raycast(from:Vector2, dir : Vector2, limit = 50):
 			return -2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if level1:
+		if state == 0:
+			if GameManager.material.get_shader_param("dissonance")==0:
+				player1.texture.pause = false
+				player2.texture.pause = false
+				player1.texture.current_frame = 0
+				player2.texture.current_frame = 0
+				state = 1
+		
+		if state == 1 && player1.texture.current_frame == 5:
+			player1.textures[0] = preload("res://Textures/playertexture.tres")
+			player2.textures[0] = preload("res://Textures/playertexture.tres")
+			GameManager.terminal_visible = true
+			GameManager.write_in_terminal(starttext)
+			state = 2
+		if state == 2 && !GameManager.terminal_visible:
+			level1 =false
+			split(true)
