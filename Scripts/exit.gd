@@ -23,7 +23,7 @@ func update():
 			else:
 				#End level here
 				get_node("/root/GameManager").progress += 1
-				get_node("/root/GameManager").next_scene()
+				get_node("/root/GameManager").end_scene()
 	else: 
 		if hasplayer != 0:
 			hasplayer = 0

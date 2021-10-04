@@ -101,7 +101,7 @@ func update_all():
 		agent.update()
 	if state == 0 && player1.state == -1:
 		if player2.state == -1:
-			GameManager.next_scene()
+			GameManager.end_scene()
 		elif player2.state == 0:
 			collapse(false)
 	elif state == 0 && player2.state == -1:
@@ -137,6 +137,7 @@ func collapse(tofirst:bool):
 		player1.state = 2
 
 func merge(tofirst:bool):
+	GameManager.material.set_shader_param("dissonance", 0.005)
 	player1.state = 1
 	player2.state = 1
 	player1.flip_h = false
@@ -161,7 +162,7 @@ func merge(tofirst:bool):
 		dir = Vector2(dir.y, -dir.x)
 
 func split(horizontal:bool):
-	GameManager.material.set_shader_param("dissonance", 0.0)
+	GameManager.material.set_shader_param("dissonance", 0.005)
 	var dir = Vector2(int(horizontal),int(!horizontal))
 	dir *= (randi()%2)*2-1
 	var move1 = raycast(Vector2(world_to_map(player1.translation).x,world_to_map(player1.translation).z), dir)

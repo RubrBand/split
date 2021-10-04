@@ -13,7 +13,7 @@ func _ready():
 func _input(event):
 	if event.is_action_released("game_split"):
 		get_node("/root/GameManager").progress +=1
-		get_node("/root/GameManager").next_scene()
+		get_node("/root/GameManager").end_scene()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

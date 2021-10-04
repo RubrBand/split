@@ -18,13 +18,17 @@ var text_buffer = ""
 var text_speed = 0.1
 var text_countdown = 0
 var input_lock = false
-onready var material = $ViewportContainer.material
+var material : Material
+var splitscene = false
 
 var col1 = Color(0.92,0.0,0.85,0.5)
 var col2 = Color(0.6,0.9,0.31,0.5)
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	material = $ViewportContainer.material
 	randomize()
 	$ViewportContainer/Viewport.add_child(startScene.instance())
 	material.set_shader_param("col1", col1)
@@ -33,14 +37,22 @@ func _ready():
 
 
 
-func next_scene():
+func end_scene():
+	$ViewportContainer/Viewport.render_target_clear_mode = Viewport.CLEAR_MODE_NEVER
+	$ViewportContainer/Viewport.render_target_update_mode = Viewport.UPDATE_DISABLED
 	var child = $ViewportContainer/Viewport.get_child(0)
-	remove_child(child)
+	$ViewportContainer/Viewport.remove_child(child)
 	child.queue_free()
+	splitscene = true
+
+func next_scene():
+	$ViewportContainer/Viewport.render_target_clear_mode = Viewport.CLEAR_MODE_ALWAYS
+	$ViewportContainer/Viewport.render_target_update_mode = Viewport.UPDATE_ALWAYS
 	if progress < levels.size():
 		$ViewportContainer/Viewport.add_child(levels[progress].instance())
 	else:
 		$ViewportContainer/Viewport.add_child(endscene.instance())
+	splitscene = false
 
 func _input(event):
 	if event.is_action_pressed("game_split"):
@@ -67,15 +79,23 @@ func _process(delta):
 					text_countdown = 0
 					$GUI/Terminal/MarginContainer/TextEdit.text += text_buffer.left(1)
 					text_buffer = text_buffer.right(1)
-
 			
 	else:
 		if $GUI/Terminal.rect_position.y < textboxlocation.y:
 			$GUI/Terminal.rect_position.y += 800*delta
 		else:
 			input_lock = false
-	
-	
+	var diss = material.get_shader_param("dissonance")
+	if splitscene:
+		if diss > 1:
+			next_scene()
+		else:
+			material.set_shader_param("dissonance",diss+delta)
+	else:
+		if diss>0.0001:
+			material.set_shader_param("dissonance",diss/(1+delta*2))
+		else:
+			material.set_shader_param("dissonance",0.0)
 
 
 func write_in_terminal(text:String):
