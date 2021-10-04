@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Levels/level_test.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/startscene.tscn" type="PackedScene" id=2]
@@ -9,14 +9,15 @@
 [ext_resource path="res://Shaders/split.shader" type="Shader" id=7]
 [ext_resource path="res://new_environment.tres" type="Environment" id=8]
 [ext_resource path="res://Scenes/Levels/level_1.tscn" type="PackedScene" id=9]
+[ext_resource path="res://music/split_without_loop_cut.ogg" type="AudioStream" id=10]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 shader_param/dissonance = null
 shader_param/col1 = null
 shader_param/col2 = null
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="GameManager" type="Node"]
@@ -26,7 +27,7 @@ startScene = ExtResource( 2 )
 endscene = ExtResource( 4 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -80,7 +81,7 @@ anchor_bottom = 1.0
 [node name="TextEdit" type="TextEdit" parent="GUI/Terminal/MarginContainer"]
 margin_right = 749.0
 margin_bottom = 244.0
-custom_styles/read_only = SubResource( 1 )
+custom_styles/read_only = SubResource( 2 )
 custom_fonts/font = ExtResource( 6 )
 custom_colors/font_color_readonly = Color( 0.0313726, 1, 0, 1 )
 readonly = true
@@ -90,3 +91,8 @@ wrap_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+autoplay = true
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

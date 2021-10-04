@@ -20,6 +20,7 @@ var text_countdown = 0
 var input_lock = false
 var material : Material
 var splitscene = false
+var fadeout = false
 
 var col1 = Color(0.92,0.0,0.85,0.5)
 var col2 = Color(0.6,0.9,0.31,0.5)
@@ -34,10 +35,13 @@ func _ready():
 	material.set_shader_param("col1", col1)
 	material.set_shader_param("col2", col2)
 	material.set_shader_param("dissonance", 0.0)
+	
 
 
 
 func end_scene():
+	if progress == 0:
+		fadeout = true
 	$ViewportContainer/Viewport.render_target_clear_mode = Viewport.CLEAR_MODE_NEVER
 	$ViewportContainer/Viewport.render_target_update_mode = Viewport.UPDATE_DISABLED
 	var child = $ViewportContainer/Viewport.get_child(0)
@@ -69,6 +73,12 @@ func _input(event):
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if fadeout: 
+		if $AudioStreamPlayer.volume_db>-80:
+			$AudioStreamPlayer.volume_db -= 40*delta
+		else: fadeout = false
+	
 	input_lock = true
 	if terminal_visible:
 		if $GUI/Terminal.rect_position.y > textboxlocation.x:
@@ -105,3 +115,8 @@ func write_in_terminal(text:String):
 	
 func clear_terminal():
 	$GUI/Terminal/MarginContainer/TextEdit.text = ""
+
+
+func _on_AudioStreamPlayer_finished():
+	$AudioStreamPlayer.stream = preload("res://music/split_loop.ogg")
+	$AudioStreamPlayer.playing = true

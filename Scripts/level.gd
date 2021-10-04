@@ -235,6 +235,9 @@ func _process(delta):
 			player2.textures[0] = preload("res://Textures/playertexture.tres")
 			GameManager.terminal_visible = true
 			GameManager.write_in_terminal(starttext)
+			GameManager.get_node("AudioStreamPlayer").stream = preload("res://music/split_without_loop_cut.ogg")
+			GameManager.get_node("AudioStreamPlayer").volume_db = 0
+			GameManager.get_node("AudioStreamPlayer").play()
 			state = 2
 		if state == 2 && !GameManager.terminal_visible:
 			level1 =false
