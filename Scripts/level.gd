@@ -233,8 +233,6 @@ func _process(delta):
 				player2.texture.pause = false
 				player1.texture.current_frame = 0
 				player2.texture.current_frame = 0
-				player1.texture.play()
-				player2.texture.play()
 				state = 1
 		
 		if state == 1 && player1.texture.current_frame == 5:
