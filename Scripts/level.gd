@@ -244,6 +244,7 @@ func _process(delta):
 	if level1:
 		if state == 0:
 			if GameManager.material.get_shader_param("dissonance")==0:
+				get_node("/root/GameManager/WorldEnvironment").queue_free()
 				player1.texture.pause = false
 				player2.texture.pause = false
 				player1.texture.current_frame = 0
