@@ -43,6 +43,8 @@ func _ready():
 		player2.textures[0] = preload("res://Textures/wakingup.tres")
 		player1.texture.current_frame = 0
 		player2.texture.current_frame = 0
+		player1.texture.pause = true
+		player2.texture.pause = true
 	else:
 		GameManager.terminal_visible = true
 		GameManager.write_in_terminal(starttext)
@@ -231,6 +233,8 @@ func _process(delta):
 				player2.texture.pause = false
 				player1.texture.current_frame = 0
 				player2.texture.current_frame = 0
+				player1.texture.play()
+				player2.texture.play()
 				state = 1
 		
 		if state == 1 && player1.texture.current_frame == 5:

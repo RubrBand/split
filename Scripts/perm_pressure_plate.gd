@@ -20,13 +20,12 @@ func update():
 			player1 = true
 		if on_player(1):
 			player2 = true
-		output()
 	elif level.state == 4&&(player1||player2):
 		locked = true
-		output()
+	output()
 
 func set_material(mat):
-	mesh.set_surface_material(0, mat)
+#	mesh.set_surface_material(0, mat)
 	for i in get_children():
 		i.set_surface_material(0, mat)
 
@@ -42,12 +41,14 @@ func undo():
 	output()
 
 func output():
-	if !(player1||player2):
-		set_material(preload("res://Materials/red.tres"))
+	if player1&&!player2&&!locked:
+		set_material(preload("res://Materials/light_green.tres"))
+	elif !player1&&player2&&!locked:
+		set_material(preload("res://Materials/pink.tres"))
 	elif (player1 && player2) || locked:
-		set_material(preload("res://Materials/green.tres"))
+		set_material(preload("res://Materials/blue.tres"))
 	else:
-		set_material(preload("res://Materials/yellow.tres"))
+		set_material(preload("res://Materials/black.tres"))
 	level.set_logic(memindex,int(player1||player2||locked))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
