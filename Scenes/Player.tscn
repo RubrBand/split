@@ -32,3 +32,5 @@ explosiveness = 1.0
 local_coords = false
 process_material = SubResource( 1 )
 draw_pass_1 = ExtResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

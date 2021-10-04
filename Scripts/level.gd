@@ -61,18 +61,26 @@ func _input(event):
 				player1.get_child(0).visible = true
 				player2.get_child(0).visible = true
 				GameManager.material.set_shader_param("dissonance", 0.005)
+				player1.get_node("AudioStreamPlayer").stream = preload("res://sounds/hit.wav")
+				player1.get_node("AudioStreamPlayer").play()
 			elif state == 1:
 				state = 0
 				player1.get_child(0).visible = false
 				player2.get_child(0).visible = false
+				player1.get_node("AudioStreamPlayer").stream = preload("res://sounds/hitreverse2.wav")
+				player1.get_node("AudioStreamPlayer").play()
 		elif event.is_action_released("game_select_p1")&&state == 1:
 			collapse(true)
 			player1.get_child(0).visible = false
 			player2.get_child(0).visible = false
+			player1.get_node("AudioStreamPlayer").stream = preload("res://sounds/hit.wav")
+			player1.get_node("AudioStreamPlayer").play()
 		elif event.is_action_released("game_select_p2")&&state == 1:
 			collapse(false)
 			player1.get_child(0).visible = false
 			player2.get_child(0).visible = false
+			player1.get_node("AudioStreamPlayer").stream = preload("res://sounds/hit.wav")
+			player1.get_node("AudioStreamPlayer").play()
 		if (event.is_action_pressed("game_down")||event.is_action_pressed("game_up"))&&state == 3:
 			split(false)
 		elif (event.is_action_pressed("game_left")||event.is_action_pressed("game_right"))&&state == 3:
@@ -106,6 +114,9 @@ func _input(event):
 					player2.memories_of_a_better_time.append(Vector2(player2.translation.x,player2.translation.z))
 					player2.goto += dir
 					player2.state = 1
+				if get_cell_item(world_to_map(player1.translation).x+dir.x,-1,world_to_map(player1.translation).z+dir.y) <= floorcount-1 || get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) <= floorcount-1:
+					player1.get_node("AudioStreamPlayer").stream = preload("res://sounds/move.wav")
+					player1.get_node("AudioStreamPlayer").play()
 		if event.is_action_pressed("game_restart"):
 			GameManager.end_scene()
 
@@ -184,6 +195,8 @@ func merge(tofirst:bool):
 		dir = Vector2(dir.y, -dir.x)
 
 func split(horizontal:bool):
+	player1.get_node("AudioStreamPlayer").stream = preload("res://sounds/split.wav")
+	player1.get_node("AudioStreamPlayer").play()
 	GameManager.material.set_shader_param("dissonance", 0.005)
 	var dir = Vector2(int(horizontal),int(!horizontal))
 	dir *= (randi()%2)*2-1

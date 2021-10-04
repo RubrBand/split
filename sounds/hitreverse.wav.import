@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hitreverse.wav-f6ca84ae83d7573377e5ecd30f9297a9.sample"
+
+[deps]
+
+source_file="res://sounds/hitreverse.wav"
+dest_files=[ "res://.import/hitreverse.wav-f6ca84ae83d7573377e5ecd30f9297a9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
