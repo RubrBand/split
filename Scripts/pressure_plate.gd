@@ -22,15 +22,15 @@ func update():
 				mesh.set_surface_material(0, preload("res://Materials/pink.tres"))
 			if !stepped:
 				stepped = true
-				level.GameManager.get_node("AudioStreamPlayer2").stream = preload("res://sounds/button2.wav")
-				level.GameManager.get_node("AudioStreamPlayer2").play()
+				level.GameManager.get_node("AudioStreamPlayerButtons").stream = preload("res://sounds/button2.wav")
+				level.GameManager.get_node("AudioStreamPlayerButtons").play()
 		else: 
 			level.set_logic(memindex,0)
 			mesh.set_surface_material(0, preload("res://Materials/red.tres"))
 			if stepped:
 				stepped = false
-				level.GameManager.get_node("AudioStreamPlayer2").stream = preload("res://sounds/button2reverse.wav")
-				level.GameManager.get_node("AudioStreamPlayer2").play()
+				level.GameManager.get_node("AudioStreamPlayerButtons").stream = preload("res://sounds/button2reverse.wav")
+				level.GameManager.get_node("AudioStreamPlayerButtons").play()
 
 
 

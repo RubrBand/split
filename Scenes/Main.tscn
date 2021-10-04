@@ -99,4 +99,6 @@ stream = ExtResource( 10 )
 autoplay = true
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayerButtons" type="AudioStreamPlayer" parent="."]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
