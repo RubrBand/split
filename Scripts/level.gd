@@ -155,9 +155,17 @@ func merge(tofirst:bool):
 	var dir = Vector2(1,0)
 	for i in range(0,4):
 		var _len = raycast(Vector2(world_to_map(player1.translation).x,world_to_map(player1.translation).z), dir)
-		markers.append(preload("res://Scenes/splittarget.tscn").instance())
-		markers[i].translation = player1.translation + Vector3(dir.x,0,dir.y)*_len
-		add_child(markers[i])
+		if _len > 0:
+			var marker = preload("res://Scenes/splittarget.tscn").instance()
+			markers.append(marker)
+			marker.translation = player1.translation + Vector3(dir.x,0,dir.y)*_len
+			add_child(marker)
+			if _len > 1:
+				var arrow = preload("res://Scenes/arrow.tscn").instance()
+				markers.append(arrow)
+				arrow.translation = player1.translation + Vector3(dir.x,0,dir.y)
+				arrow.rotate_y(PI/2*i)
+				add_child(arrow)
 		dir = Vector2(dir.y, -dir.x)
 
 func split(horizontal:bool):

@@ -72,8 +72,7 @@ func _process(delta):
 			else:
 				$Particles.emitting = true
 				pause = true
-				print("oop")
-			
+	
 	
 	
 	
