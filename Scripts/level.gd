@@ -48,7 +48,7 @@ func _ready():
 	else:
 		GameManager.terminal_visible = true
 		GameManager.write_in_terminal(starttext)
-	
+		merge(true)
 	
 
 
