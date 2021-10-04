@@ -30,5 +30,10 @@ func close():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if !open && scale.y < 1:
+		scale.y+=delta
+		translation.y += delta/2
+	elif open && scale.y >0.1:
+		scale.y-=delta
+		translation.y -= delta/2

@@ -13,6 +13,8 @@ var markers = []
 export(String, MULTILINE) var starttext = ""
 onready var GameManager = get_node("/root/GameManager")
 
+var exit = false
+
 export var level1 = false
 
 
@@ -103,9 +105,10 @@ func _input(event):
 					player2.goto += dir
 					player2.state = 1
 		if event.is_action_pressed("game_restart"):
-			get_parent().next_scene()
+			GameManager.end_scene()
 
 func update_all():
+	set_logic(0,0)
 	for agent in agents:
 		agent.update()
 	if state == 0 && player1.state == -1:
@@ -122,14 +125,14 @@ func update_all():
 	if player1.translation == player2.translation && player1.state==0 && player2.state==0&&state!=3:
 		merge(true)
 
-func set_logic(var cell, var value):
+func set_logic(var cell, var value, var update = true):
 	
 	if logic.size()<=cell:
 		for _i in range(logic.size(),cell+1):
 			logic.append(0)
 	var changed = logic[cell]!=value
 	logic[cell] = value
-	if changed:
+	if changed && update:
 		update_all()
 
 func get_logic(var cell):
@@ -242,3 +245,7 @@ func _process(delta):
 		if state == 2 && !GameManager.terminal_visible:
 			level1 =false
 			split(true)
+	
+	if exit:
+		GameManager.progress += 1
+		GameManager.end_scene()
