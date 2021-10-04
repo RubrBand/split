@@ -9,7 +9,7 @@
 [ext_resource path="res://Shaders/split.shader" type="Shader" id=7]
 [ext_resource path="res://new_environment.tres" type="Environment" id=8]
 [ext_resource path="res://Scenes/Levels/level_1.tscn" type="PackedScene" id=9]
-[ext_resource path="res://music/split_without_loop_cut.ogg" type="AudioStream" id=10]
+[ext_resource path="res://music/menu_ambient.ogg" type="AudioStream" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
