@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Mesh Libraries/celllibrary.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Level bits/perm_pressure_plate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Level bits/door.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Level bits/exit.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Textures/greenidle.tres" type="Texture" id=9]
 [ext_resource path="res://Textures/pinkidle.tres" type="Texture" id=10]
@@ -13,7 +15,7 @@ mesh_library = ExtResource( 2 )
 cell_size = Vector3( 1, 0.5, 1 )
 cell_center_y = false
 data = {
-"cells": PoolIntArray(  )
+"cells": PoolIntArray( 1, 0, -1610612733, 65533, 0, -1610612733, -65536, 0, 0, -65535, 0, -1610481661, -3, 0, 131075, -2, 0, -1073741824, -1, 0, -1073741824, -6, 2, 0, -5, 2, -1610612736, -4, 2, -1610612736, 65530, 3, -1610612733, 65531, 3, -1610612733, 65532, 3, -1610612733, -6, 3, 537001987, -5, 3, 131075, -4, 3, -1610481661, 0, 65530, -1609957373, 1, 65530, 655363, 65533, 65530, 655363, 65534, 65530, 655363, 65535, 65530, 655363, -65536, 65530, 131075, -65535, 65530, 131075, -3, 65530, 131075, -2, 65530, 131075, -1, 65530, 131075, 1, 65531, -1610612733, 65533, 65531, -1073086461, -65536, 65531, 0, -65535, 65531, -1610481661, -3, 65531, 131075, -2, 65531, -1073741824, -1, 65531, -1610612736, 1, 65532, 3, 65533, 65532, 655363, -65536, 65532, -1610612736, -65535, 65532, 131075, -3, 65532, -1610481661, -2, 65532, 0, -1, 65532, 0, 1, 65533, -1610612733, 65532, 65533, 3, 65533, 65533, -1073741821, 65534, 65533, 3, -65536, 65533, 0, -65535, 65533, -536739837, -4, 65533, -1610481661, -3, 65533, -1610481661, -2, 65533, 131075, -1, 65533, 536870912, 1, 65534, 3, -65536, 65534, 0, -65535, 65534, 131075, -6, 65534, -1610612736, -5, 65534, 2, -4, 65534, -1610612736, -3, 65534, -1610612734, -2, 65534, -1610612736, -1, 65534, -1610612736, 1, 65535, -1610612733, 65533, 65535, -1610612733, -65536, 65535, 0, -65535, 65535, -1073610749, -3, 65535, -1610481661, -2, 65535, -1073741824, -1, 65535, 0 )
 }
 script = ExtResource( 1 )
 __meta__ = {
@@ -39,7 +41,21 @@ transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -
 texture = ExtResource( 10 )
 
 [node name="exit1" parent="." instance=ExtResource( 6 )]
-transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0.5, -0.25, 0.5 )
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -5.5, -0.25, 2.5 )
 
 [node name="exit2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -0.5, -0.25, 0.5 )
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -5.5, -0.25, -1.5 )
+
+[node name="perm_pressure_plate" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.25, -3.5 )
+memindex = 1
+
+[node name="door" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.25, -1.5 )
+memindex = 1
+
+[node name="door2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.25, -1.5 )
+memindex = 1
+open = true
+invert = true
