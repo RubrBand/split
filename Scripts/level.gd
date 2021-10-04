@@ -162,7 +162,7 @@ func collapse(tofirst:bool):
 		player1.state = 2
 
 func merge(tofirst:bool):
-	GameManager.material.set_shader_param("dissonance", 0.005)
+	GameManager.material.set_shader_param("dissonance", max(0.005,GameManager.material.get_shader_param("dissonance")))
 	player1.state = 1
 	player2.state = 1
 	player1.flip_h = false

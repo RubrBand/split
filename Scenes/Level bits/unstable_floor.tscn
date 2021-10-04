@@ -4,7 +4,7 @@
 [ext_resource path="res://Meshes/pressure_plate.tres" type="CubeMesh" id=2]
 [ext_resource path="res://Meshes/floor.tres" type="CubeMesh" id=3]
 
-[node name="pressure_plate" type="MeshInstance"]
+[node name="unstable_floor" type="MeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
 mesh = ExtResource( 2 )
 material/0 = null

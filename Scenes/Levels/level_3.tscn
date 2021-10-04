@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/level.gd" type="Script" id=1]
+[ext_resource path="res://Mesh Libraries/celllibrary.tres" type="MeshLibrary" id=2]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Level bits/pressure_plate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Level bits/door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Level bits/exit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Textures/greenidle.tres" type="Texture" id=9]
+[ext_resource path="res://Textures/pinkidle.tres" type="Texture" id=10]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=12]
+
+[node name="GridMap" type="GridMap"]
+mesh_library = ExtResource( 2 )
+cell_size = Vector3( 1, 0.5, 1 )
+cell_center_y = false
+data = {
+"cells": PoolIntArray( 65531, 0, 1073741827, -65536, 0, 1073872896, -65535, 0, 1073872896, -5, 0, 1073872899, -1, 0, 1073872896, -65536, 1, 1073872896, -65535, 1, 1073872896, -1, 1, 1073872896, 0, 2, 1073741827, -65536, 2, 1073872899, 65531, 65530, 1073741827, -65536, 65530, 1073872896, -65535, 65530, 1073872896, -5, 65530, 1073872899, -1, 65530, 1073872896, 4, 65531, 1073741827, -65535, 65531, 1073872896, -65533, 65531, 1073872896, -65532, 65531, 1073872899, -5, 65531, 1073872896, -1, 65531, 131072, -65535, 65532, 537001984, -5, 65532, 131072, -1, 65532, 2, 0, 65533, 3, 65530, 65533, 3, -65536, 65533, -536739837, -65535, 65533, 131072, -6, 65533, 131075, -5, 65533, 131072, -4, 65533, 131072, -3, 65533, 131072, -2, 65533, 131072, -1, 65533, 131072, 0, 65534, 3, 65532, 65534, 536870915, 65533, 65534, 3, 65534, 65534, 3, 65535, 65534, 3, -65536, 65534, -2147352573, -65535, 65534, 131072, -5, 65534, 131072, -4, 65534, 131075, -3, 65534, 131075, -2, 65534, 131075, -1, 65534, 131075, -65536, 65535, 131072, -65535, 65535, 131072, -5, 65535, 131072, -1, 65535, 131072 )
+}
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+starttext = "
+"
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 12.421, 19.917, 11.864 )
+projection = 1
+current = true
+size = 10.0
+script = ExtResource( 12 )
+
+[node name="player1" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.5, 0.25, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="player2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.5, 0.25, -0.5 )
+texture = ExtResource( 10 )
+
+[node name="exit1" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -4.5, -0.25, -0.5 )
+
+[node name="exit2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -4.5, -0.25, -4.5 )
+
+[node name="door" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.25, -3.5 )
+memindex = 1
+
+[node name="pressure_plate" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, -0.25, -4.5 )
