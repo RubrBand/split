@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Mesh Libraries/celllibrary.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Level bits/door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Level bits/unstable_floor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Level bits/exit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Level bits/perm_pressure_plate.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Level bits/or.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Textures/greenidle.tres" type="Texture" id=9]
 [ext_resource path="res://Textures/pinkidle.tres" type="Texture" id=10]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=12]
@@ -13,7 +17,7 @@ mesh_library = ExtResource( 2 )
 cell_size = Vector3( 1, 0.5, 1 )
 cell_center_y = false
 data = {
-"cells": PoolIntArray(  )
+"cells": PoolIntArray( 0, 0, -536870909, 1, 0, -1610612733, 2, 0, 3, 65534, 0, -1610612733, 65535, 0, 3, -65536, 0, -1072431101, -65535, 0, 1310723, -65534, 0, 1310723, -2, 0, 1310723, -1, 0, 1310723, -65535, 65527, -1609170944, 65534, 65528, -1610612733, 65535, 65528, -1073741821, -65535, 65528, 1441792, -2, 65528, -1610481661, -1, 65528, -1610481661, 2, 65529, 3, 65534, 65529, 3, -65536, 65529, 1441792, -65535, 65529, 1441792, -65534, 65529, 1310723, -2, 65529, 1310723, -1, 65529, -535429120, -65535, 65530, 1441794, 0, 65531, -536870909, 2, 65531, -1610612733, 65532, 65531, -1610612733, 65533, 65531, 3, 65534, 65531, -1610612733, 65535, 65531, 3, -65536, 65531, 1310723, -65535, 65531, -1609170943, -65534, 65531, 1310723, -4, 65531, 1310723, -3, 65531, -1609302013, -2, 65531, 1310723, -1, 65531, -1609302013, 2, 65532, 3, 3, 65532, 3, 4, 65532, 3, 65532, 65532, 3, -65536, 65532, -1609170944, -65535, 65532, 1441792, -65534, 65532, 1310723, -65533, 65532, 1310723, -65532, 65532, 1310723, -4, 65532, -1609302013, -3, 65532, 1441792, -2, 65532, -1072300032, -1, 65532, -1072300032, 4, 65533, 3, 65532, 65533, 3, 65533, 65533, 3, 65534, 65533, -536870909, -65536, 65533, -1609170944, -65535, 65533, -1609170944, -65534, 65533, 1441792, -65533, 65533, 1441792, -65532, 65533, 1310723, -4, 65533, 1310723, -3, 65533, 1310723, -2, 65533, 1310723, -1, 65533, -1609170944, 2, 65534, 3, 3, 65534, 3, 4, 65534, 3, 65532, 65534, 3, -65536, 65534, 1441792, -65535, 65534, -1609170944, -65534, 65534, -1072431101, -65533, 65534, 1310723, -65532, 65534, 1310723, -4, 65534, -1609302013, -3, 65534, -1609170944, -2, 65534, 1441792, -1, 65534, -1609170944, 2, 65535, 3, 65532, 65535, 3, 65533, 65535, -1610612733, 65534, 65535, 3, -65536, 65535, 1441792, -65535, 65535, 1441792, -65534, 65535, 1310723, -4, 65535, 1310723, -3, 65535, 1310723, -2, 65535, 1310723, -1, 65535, 1441792 )
 }
 script = ExtResource( 1 )
 __meta__ = {
@@ -39,7 +43,44 @@ transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -
 texture = ExtResource( 10 )
 
 [node name="exit1" parent="." instance=ExtResource( 6 )]
-transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0.5, -0.25, 0.5 )
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -0.5, -0.25, -6.5 )
 
 [node name="exit2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -0.5, -0.25, 0.5 )
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.5, -0.25, -8.5 )
+
+[node name="perm_pressure_plate" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.25, -1.5 )
+memindex = 1
+
+[node name="perm_pressure_plate2" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, -0.25, -2.5 )
+memindex = 2
+
+[node name="perm_pressure_plate3" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.25, -3.5 )
+memindex = 3
+
+[node name="door" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.25, -5.5 )
+memindex = 5
+
+[node name="door2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.25, -6.5 )
+memindex = 3
+open = true
+invert = true
+
+[node name="unstable_floor" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, -4.5 )
+
+[node name="or" parent="." instance=ExtResource( 8 )]
+memindex = 4
+var1 = 1
+var2 = 2
+type = 1
+
+[node name="or2" parent="." instance=ExtResource( 8 )]
+memindex = 5
+var1 = 3
+var2 = 4
+type = 1
