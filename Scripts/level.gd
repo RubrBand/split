@@ -12,6 +12,7 @@ var state = 0 #0 - players can move, 1 - waiting to select player, 2 - PLAYER RE
 var markers = []
 export(String, MULTILINE) var starttext = ""
 onready var GameManager = get_node("/root/GameManager")
+var ountdown = 4
 
 var exit = false
 
@@ -248,8 +249,9 @@ func _process(delta):
 				player1.texture.current_frame = 0
 				player2.texture.current_frame = 0
 				state = 1
-		
-		if state == 1 && player1.texture.current_frame == 5:
+		if state == 1:
+			ountdown -= delta
+		if state == 1 && ountdown < 0:
 			player1.textures[0] = preload("res://Textures/playertexture.tres")
 			player2.textures[0] = preload("res://Textures/playertexture.tres")
 			GameManager.terminal_visible = true
