@@ -87,6 +87,7 @@ func _process(delta):
 	
 	
 	#animation
+	
 	if state == 0 || grid.state == 3:
 		texture = textures[0]
 	elif state == 3:

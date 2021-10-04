@@ -29,12 +29,12 @@ func _ready():
 	player2.textures.resize(4)
 	player1.textures[0] = preload("res://Textures/greenidle.tres")
 	player2.textures[0] = preload("res://Textures/pinkidle.tres")
-	player1.textures[1] = preload("res://Sprites/player/greenpush.png")
-	player2.textures[1] = preload("res://Sprites/player/pinkpush.png")
-	player1.textures[2] = preload("res://Sprites/player/greenpull.png")
-	player2.textures[2] = preload("res://Sprites/player/pinkpull.png")
-	player1.textures[3] = preload("res://Sprites/player/greenhop.png")
-	player2.textures[3] = preload("res://Sprites/player/pinkhop.png")
+	player1.textures[1] = preload("res://sprites/player/greenpush.png")
+	player2.textures[1] = preload("res://sprites/player/pinkpush.png")
+	player1.textures[2] = preload("res://sprites/player/greenpull.png")
+	player2.textures[2] = preload("res://sprites/player/pinkpull.png")
+	player1.textures[3] = preload("res://sprites/player/greenhop.png")
+	player2.textures[3] = preload("res://sprites/player/pinkhop.png")
 	player1.get_child(0).texture = preload("res://sprites/greenbutton1.png")
 	player2.get_child(0).texture = preload("res://sprites/pinkbutton1.png")
 	
@@ -251,7 +251,6 @@ func _process(delta):
 				state = 1
 		if state == 1:
 			ountdown -= delta
-			GameManager.material.set_shader_param("dissonance",ountdown)
 		if state == 1 && ountdown < 0:
 			player1.textures[0] = preload("res://Textures/playertexture.tres")
 			player2.textures[0] = preload("res://Textures/playertexture.tres")
