@@ -18,21 +18,29 @@ var text_buffer = ""
 var text_speed = 0.1
 var text_countdown = 0
 var input_lock = false
+onready var material = $ViewportContainer.material
+
+var col1 = Color(0.92,0.0,0.85,0.5)
+var col2 = Color(0.6,0.9,0.31,0.5)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	add_child(startScene.instance())
+	$ViewportContainer/Viewport.add_child(startScene.instance())
+	material.set_shader_param("col1", col1)
+	material.set_shader_param("col2", col2)
+	material.set_shader_param("dissonance", 0.0)
+
 
 
 func next_scene():
-	var child = get_child(1)
+	var child = $ViewportContainer/Viewport.get_child(0)
 	remove_child(child)
 	child.queue_free()
 	if progress < levels.size():
-		add_child(levels[progress].instance())
+		$ViewportContainer/Viewport.add_child(levels[progress].instance())
 	else:
-		add_child(endscene.instance())
+		$ViewportContainer/Viewport.add_child(endscene.instance())
 
 func _input(event):
 	if event.is_action_pressed("game_split"):

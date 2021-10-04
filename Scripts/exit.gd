@@ -22,8 +22,8 @@ func update():
 				level.set_logic(memindex,1)
 			else:
 				#End level here
-				level.get_parent().progress += 1
-				level.get_parent().next_scene()
+				get_node("/root/GameManager").progress += 1
+				get_node("/root/GameManager").next_scene()
 	else: 
 		if hasplayer != 0:
 			hasplayer = 0

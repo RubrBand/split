@@ -13,6 +13,8 @@ var markers = []
 export(String, MULTILINE) var starttext = ""
 onready var GameManager = get_node("/root/GameManager")
 
+
+
 var floorcount = 2 #how many floor types there are, they should be the first ones
 
 # Called when the node enters the scene tree for the first time.
@@ -44,10 +46,12 @@ func _input(event):
 				state = 1
 				player1.get_child(0).visible = true
 				player2.get_child(0).visible = true
+				GameManager.material.set_shader_param("dissonance", 0.005)
 			elif state == 1:
 				state = 0
 				player1.get_child(0).visible = false
 				player2.get_child(0).visible = false
+				GameManager.material.set_shader_param("dissonance", 0)
 		elif event.is_action_released("game_select_p1")&&state == 1:
 			collapse(true)
 			player1.get_child(0).visible = false
@@ -97,7 +101,7 @@ func update_all():
 		agent.update()
 	if state == 0 && player1.state == -1:
 		if player2.state == -1:
-			get_parent().next_scene()
+			GameManager.next_scene()
 		elif player2.state == 0:
 			collapse(false)
 	elif state == 0 && player2.state == -1:
@@ -125,6 +129,7 @@ func get_logic(var cell):
 	else: return 0
 
 func collapse(tofirst:bool):
+	GameManager.material.set_shader_param("dissonance", 0.005)
 	state = 2
 	if tofirst:
 		player2.state = 2
@@ -156,6 +161,7 @@ func merge(tofirst:bool):
 		dir = Vector2(dir.y, -dir.x)
 
 func split(horizontal:bool):
+	GameManager.material.set_shader_param("dissonance", 0.0)
 	var dir = Vector2(int(horizontal),int(!horizontal))
 	dir *= (randi()%2)*2-1
 	var move1 = raycast(Vector2(world_to_map(player1.translation).x,world_to_map(player1.translation).z), dir)
