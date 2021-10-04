@@ -79,8 +79,9 @@ func _process(delta):
 			$AudioStreamPlayer.volume_db -= 40*delta
 		else: fadeout = false
 	
-	input_lock = true
+	
 	if terminal_visible:
+		input_lock = true
 		if $GUI/Terminal.rect_position.y > textboxlocation.x:
 			$GUI/Terminal.rect_position.y -= 800*delta
 		else:
@@ -95,8 +96,9 @@ func _process(delta):
 	else:
 		if $GUI/Terminal.rect_position.y < textboxlocation.y:
 			$GUI/Terminal.rect_position.y += 800*delta
-		else:
-			input_lock = false
+			if $GUI/Terminal.rect_position.y >= textboxlocation.y:
+				input_lock = false
+
 	var diss = material.get_shader_param("dissonance")
 	if splitscene:
 		if diss > 1:
