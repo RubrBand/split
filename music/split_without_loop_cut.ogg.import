@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/split_without_loop_cut.ogg-dad09f61737e441b8cbb7b2278984733.oggstr"
+
+[deps]
+
+source_file="res://music/split_without_loop_cut.ogg"
+dest_files=[ "res://.import/split_without_loop_cut.ogg-dad09f61737e441b8cbb7b2278984733.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
