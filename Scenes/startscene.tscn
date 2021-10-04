@@ -22,10 +22,12 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 949.877
 margin_top = 159.226
-margin_right = 1891.88
-margin_bottom = 717.226
+margin_right = 291.88
+margin_bottom = -182.774
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0392157, 0.741176, 0.776471, 1 )
 text = "Constant scientific experimentation,
@@ -56,9 +58,9 @@ __meta__ = {
 
 [node name="Label3" type="Label" parent="."]
 margin_left = 945.51
-margin_top = 843.898
+margin_top = 775.898
 margin_right = 1743.51
-margin_bottom = 942.898
+margin_bottom = 874.898
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0392157, 0.741176, 0.776471, 1 )
 text = "Made by rubr and ovrbi for in 
