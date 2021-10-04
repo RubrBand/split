@@ -14,7 +14,6 @@ func _ready():
 	pass
 
 func update():
-	print(level.get_logic(memindex))
 	if level.get_logic(memindex)!=-1:
 		if on_player():
 	#			print(level.get_logic(memindex))
