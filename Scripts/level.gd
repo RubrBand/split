@@ -10,6 +10,8 @@ var player1
 var player2
 var state = 0 #0 - players can move, 1 - waiting to select player, 2 - PLAYER REVERSING (beeping noises), 3 - waiting to select direction, 4 - players being pushed
 var markers = []
+export(String, MULTILINE) var starttext = ""
+onready var GameManager = get_node("/root/GameManager")
 
 var floorcount = 2 #how many floor types there are, they should be the first ones
 
@@ -29,61 +31,66 @@ func _ready():
 	player2.textures[3] = preload("res://Sprites/player/pinkhop.png")
 	player1.get_child(0).texture = preload("res://sprites/greenbutton1.png")
 	player2.get_child(0).texture = preload("res://sprites/pinkbutton1.png")
+	
+	GameManager.terminal_visible = true
+	GameManager.write_in_terminal(starttext)
 
 
 func _input(event):
-	if event.is_action_released("game_split")&&player1.state==0&&player2.state==0:
-		if state == 0:
-			state = 1
-			player1.get_child(0).visible = true
-			player2.get_child(0).visible = true
-		elif state == 1:
-			state = 0
+	
+	if(!GameManager.input_lock):
+		if event.is_action_released("game_split")&&player1.state==0&&player2.state==0:
+			if state == 0:
+				state = 1
+				player1.get_child(0).visible = true
+				player2.get_child(0).visible = true
+			elif state == 1:
+				state = 0
+				player1.get_child(0).visible = false
+				player2.get_child(0).visible = false
+		elif event.is_action_released("game_select_p1")&&state == 1:
+			collapse(true)
 			player1.get_child(0).visible = false
 			player2.get_child(0).visible = false
-	elif event.is_action_released("game_select_p1")&&state == 1:
-		collapse(true)
-		player1.get_child(0).visible = false
-		player2.get_child(0).visible = false
-	elif event.is_action_released("game_select_p2")&&state == 1:
-		collapse(false)
-		player1.get_child(0).visible = false
-		player2.get_child(0).visible = false
-	if (event.is_action_pressed("game_down")||event.is_action_pressed("game_up"))&&state == 3:
-		split(false)
-	elif (event.is_action_pressed("game_left")||event.is_action_pressed("game_right"))&&state == 3:
-		split(true)
-	
-	if event.is_action_pressed("game_select_p1"):
-		player1.get_child(0).texture = preload("res://sprites/greenbutton0.png")
-	if event.is_action_pressed("game_select_p2"):
-		player2.get_child(0).texture = preload("res://sprites/pinkbutton0.png")
-	if event.is_action_released("game_select_p1"):
-		player1.get_child(0).texture = preload("res://sprites/greenbutton1.png")
-	if event.is_action_released("game_select_p2"):
-		player2.get_child(0).texture = preload("res://sprites/pinkbutton1.png")
-	
-	if state == 0:
-		var dir = Vector2(0,0)
-		if event.is_action_pressed("game_up"):
-			dir = Vector2(0,-1)
-		if event.is_action_pressed("game_down"):
-			dir = Vector2(0,1)
-		if event.is_action_pressed("game_left"):
-			dir = Vector2(-1,0)
-		if event.is_action_pressed("game_right"):
-			dir = Vector2(1,0)
-		if dir != Vector2(0,0)&&player1.state==0&&player2.state==0:
-			if get_cell_item(world_to_map(player1.translation).x+dir.x,-1,world_to_map(player1.translation).z+dir.y) <= floorcount-1:
-				player1.memories_of_a_better_time.append(Vector2(player1.translation.x,player1.translation.z))
-				player1.goto += dir
-				player1.state = 1
-			if get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) <= floorcount-1:
-				player2.memories_of_a_better_time.append(Vector2(player2.translation.x,player2.translation.z))
-				player2.goto += dir
-				player2.state = 1
-	if event.is_action_pressed("game_restart"):
-		get_parent().next_scene()
+		elif event.is_action_released("game_select_p2")&&state == 1:
+			collapse(false)
+			player1.get_child(0).visible = false
+			player2.get_child(0).visible = false
+		if (event.is_action_pressed("game_down")||event.is_action_pressed("game_up"))&&state == 3:
+			split(false)
+		elif (event.is_action_pressed("game_left")||event.is_action_pressed("game_right"))&&state == 3:
+			split(true)
+		
+		if event.is_action_pressed("game_select_p1"):
+			player1.get_child(0).texture = preload("res://sprites/greenbutton0.png")
+		if event.is_action_pressed("game_select_p2"):
+			player2.get_child(0).texture = preload("res://sprites/pinkbutton0.png")
+		if event.is_action_released("game_select_p1"):
+			player1.get_child(0).texture = preload("res://sprites/greenbutton1.png")
+		if event.is_action_released("game_select_p2"):
+			player2.get_child(0).texture = preload("res://sprites/pinkbutton1.png")
+		
+		if state == 0:
+			var dir = Vector2(0,0)
+			if event.is_action_pressed("game_up"):
+				dir = Vector2(0,-1)
+			if event.is_action_pressed("game_down"):
+				dir = Vector2(0,1)
+			if event.is_action_pressed("game_left"):
+				dir = Vector2(-1,0)
+			if event.is_action_pressed("game_right"):
+				dir = Vector2(1,0)
+			if dir != Vector2(0,0)&&player1.state==0&&player2.state==0:
+				if get_cell_item(world_to_map(player1.translation).x+dir.x,-1,world_to_map(player1.translation).z+dir.y) <= floorcount-1:
+					player1.memories_of_a_better_time.append(Vector2(player1.translation.x,player1.translation.z))
+					player1.goto += dir
+					player1.state = 1
+				if get_cell_item(world_to_map(player2.translation).x+dir.x,-1,world_to_map(player2.translation).z+dir.y) <= floorcount-1:
+					player2.memories_of_a_better_time.append(Vector2(player2.translation.x,player2.translation.z))
+					player2.goto += dir
+					player2.state = 1
+		if event.is_action_pressed("game_restart"):
+			get_parent().next_scene()
 
 func update_all():
 	for agent in agents:
