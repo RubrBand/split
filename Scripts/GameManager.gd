@@ -48,6 +48,8 @@ func end_scene():
 	$ViewportContainer/Viewport.remove_child(child)
 	child.queue_free()
 	splitscene = true
+	get_node("AudioStreamPlayer2").stream = preload("res://sounds/bass_thingy.wav")
+	get_node("AudioStreamPlayer2").play()
 
 func next_scene():
 	$ViewportContainer/Viewport.render_target_clear_mode = Viewport.CLEAR_MODE_ALWAYS
@@ -57,6 +59,8 @@ func next_scene():
 	else:
 		$ViewportContainer/Viewport.add_child(endscene.instance())
 	splitscene = false
+	get_node("AudioStreamPlayer2").stream = preload("res://sounds/bass_thingy.wav")
+	get_node("AudioStreamPlayer2").play()
 
 func _input(event):
 	if event.is_action_pressed("game_split"):
