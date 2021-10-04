@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rise.wav-f1880e91188ff7e40817a36f4d5d61ac.sample"
+
+[deps]
+
+source_file="res://sounds/rise.wav"
+dest_files=[ "res://.import/rise.wav-f1880e91188ff7e40817a36f4d5d61ac.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
