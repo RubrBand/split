@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/level.gd" type="Script" id=1]
+[ext_resource path="res://Mesh Libraries/celllibrary.tres" type="MeshLibrary" id=2]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Level bits/exit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Textures/greenidle.tres" type="Texture" id=9]
+[ext_resource path="res://Textures/pinkidle.tres" type="Texture" id=10]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=12]
+
+[node name="GridMap" type="GridMap"]
+mesh_library = ExtResource( 2 )
+cell_size = Vector3( 1, 0.5, 1 )
+cell_center_y = false
+data = {
+"cells": PoolIntArray(  )
+}
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+starttext = "
+"
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 12.421, 19.917, 11.864 )
+projection = 1
+current = true
+size = 10.0
+script = ExtResource( 12 )
+
+[node name="player1" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.5, 0.25, -0.5 )
+texture = ExtResource( 9 )
+
+[node name="player2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.5, 0.25, -0.5 )
+texture = ExtResource( 10 )
+
+[node name="exit1" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0.5, -0.25, 0.5 )
+
+[node name="exit2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -0.5, -0.25, 0.5 )
