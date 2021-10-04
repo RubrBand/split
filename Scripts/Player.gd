@@ -16,7 +16,7 @@ var y_normal : float
 var y_velocity = 0.0
 var gravity = 20
 var textures = [] #0 - idle, 1 - push, 2 - pull, 3 - jump
-
+var pause = false
 
 var state = 0 #-1 - dead, 0 - not moving, 1 - moving, 2 - moving backwards, 3 - falling
 
@@ -30,6 +30,10 @@ func _ready():
 	gameManager = get_node("/root/GameManager")
 
 func _process(delta):
+	if pause:
+		grid.merge(grid.player1!=self)
+		pause = false
+	
 	if state == 1:
 		var tspeed = int(grid.state >3)*fallspeed + int(grid.state<4)*speed
 		if(abs(goto.x-translation.x)<tspeed*delta):
@@ -66,8 +70,13 @@ func _process(delta):
 			if(memories_of_a_better_time.size()>0):
 				goto = memories_of_a_better_time.pop_back()
 			else:
-				grid.merge(grid.player1!=self)
-		
+				$Particles.emitting = true
+				pause = true
+				print("oop")
+			
+	
+	
+	
 	elif state == 3:
 		y_velocity += gravity*delta
 		translation.y -= y_velocity*delta

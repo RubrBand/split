@@ -51,7 +51,6 @@ func _input(event):
 				state = 0
 				player1.get_child(0).visible = false
 				player2.get_child(0).visible = false
-				GameManager.material.set_shader_param("dissonance", 0)
 		elif event.is_action_released("game_select_p1")&&state == 1:
 			collapse(true)
 			player1.get_child(0).visible = false

@@ -1,0 +1,9 @@
+[gd_resource type="QuadMesh" load_steps=2 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+vertex_color_use_as_albedo = true
+params_billboard_mode = 1
+
+[resource]
+material = SubResource( 1 )
+size = Vector2( 0.062, 0.062 )
