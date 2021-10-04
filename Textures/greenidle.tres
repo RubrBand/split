@@ -6,6 +6,7 @@
 [ext_resource path="res://sprites/player/greenidle/greenidle2.png" type="Texture" id=4]
 
 [resource]
+flags = 16
 frames = 4
 frame_0/texture = ExtResource( 1 )
 frame_0/delay_sec = 0.4
