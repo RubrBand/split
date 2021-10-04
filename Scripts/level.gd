@@ -46,8 +46,9 @@ func _ready():
 		player1.texture.pause = true
 		player2.texture.pause = true
 	else:
-		GameManager.terminal_visible = true
-		GameManager.write_in_terminal(starttext)
+		if starttext != "":
+			GameManager.terminal_visible = true
+			GameManager.write_in_terminal(starttext)
 		merge(true)
 	
 
