@@ -244,7 +244,6 @@ func _process(delta):
 	if level1:
 		if state == 0:
 			if GameManager.material.get_shader_param("dissonance")==0:
-				get_node("/root/GameManager/WorldEnvironment").queue_free()
 				player1.texture.pause = false
 				player2.texture.pause = false
 				player1.texture.current_frame = 0
@@ -252,6 +251,7 @@ func _process(delta):
 				state = 1
 		if state == 1:
 			ountdown -= delta
+			GameManager.material.set_shader_param("dissonance",ountdown)
 		if state == 1 && ountdown < 0:
 			player1.textures[0] = preload("res://Textures/playertexture.tres")
 			player2.textures[0] = preload("res://Textures/playertexture.tres")
