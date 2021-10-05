@@ -24,6 +24,8 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, -1, 0 )
 }
 starttext = "
+> [admin]: right 
+> [admin]: i should probably tell you that you can RESET a TEST ROOM by pressing R
 >>>"
 
 [node name="Camera" type="Camera" parent="."]
