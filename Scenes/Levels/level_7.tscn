@@ -22,6 +22,12 @@ __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 0, 0 )
 }
+starttext = "
+> [admin]: . . .
+> [admin]: . . . hold on, something's just come up
+> [admin]: i need to brb
+> [admin]: you can handle this, right?
+>>>"
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 12.421, 19.917, 11.864 )

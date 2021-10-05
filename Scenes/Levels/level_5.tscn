@@ -25,11 +25,7 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, -1, 0 )
 }
 starttext = "
-> [admin]: . . .
-> [admin]: . . . hold on, something's just come up
-> [admin]: i need to brb
-> [admin]: you can handle this, right?
-> [admin]: just remember that splitting reverts all actions of the other version of you
+> [admin]: don't forget that splitting reverts all actions of the other instance of you
 >>>"
 
 [node name="Camera" type="Camera" parent="."]

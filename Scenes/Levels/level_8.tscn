@@ -25,7 +25,7 @@ __meta__ = {
 }
 starttext = "
 >[admin]: oh, this is interesting
->[admin]: you know how usually you end up resetting one of your versions when you split?
+>[admin]: you know how usually you end up resetting one of your instances when you split?
 >[admin]: well, turns out if you force yourself to merge, that doesn't happen!
 >>>"
 
